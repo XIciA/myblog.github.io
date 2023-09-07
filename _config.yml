@@ -106,4 +106,4 @@ theme: hueman
 deploy:
   type: git
   repo: git@github.com:XIciA/XIciA.github.io.git
-  branch: master
+  branch: hexo
