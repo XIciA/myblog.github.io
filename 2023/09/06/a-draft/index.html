@@ -21,7 +21,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/2023/09/06/images/catH.png">
 <meta property="article:published_time" content="2023-09-06T12:00:32.000Z">
-<meta property="article:modified_time" content="2023-09-07T17:21:54.834Z">
+<meta property="article:modified_time" content="2023-09-07T17:37:58.610Z">
 <meta property="article:author" content="Vapor">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/2023/09/06/images/catH.png">
@@ -187,7 +187,7 @@
 <div class="article-date">
   <i class="fa fa-calendar-plus-o"></i>
   <a href="/2023/09/06/a-draft/" class="article-date">
-     <time datetime="2023-09-07T17:21:54.834Z" itemprop="dateModified">2023-09-08</time>
+     <time datetime="2023-09-07T17:37:58.610Z" itemprop="dateModified">2023-09-08</time>
   </a>
 </div>
 
@@ -358,14 +358,18 @@
 <li><strong>提交你的修改到 Git 仓库</strong>：在你发布网站之后，确保将你的修改和生成的文件提交到你的 Git 仓库，以便跟踪网站的历史和与团队成员协作。你可以使用以下命令来提交：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -m &quot;描述你的修改&quot;</span><br><span class="line">git push </span><br></pre></td></tr></table></figure></li>
 </ul>
 <hr>
-<h1 id="四、相关脚本"><a href="#四、相关脚本" class="headerlink" title="四、相关脚本"></a>四、相关脚本</h1>
+<h1 id="四、相关脚本"><a href="#四、相关脚本" class="headerlink" title="四、相关脚本"></a>四、相关脚本</h1><h1 id="五、踩雷与排雷"><a href="#五、踩雷与排雷" class="headerlink" title="五、踩雷与排雷"></a>五、踩雷与排雷</h1><h2 id="1-静态博客在线版本与源文件的Git管理"><a href="#1-静态博客在线版本与源文件的Git管理" class="headerlink" title="1.静态博客在线版本与源文件的Git管理"></a>1.静态博客在线版本与源文件的Git管理</h2><blockquote>
+<p><strong>踩雷</strong>：master与branch,hexo deploy与git push,Git管理与静态页面混淆不清,导致分支上混子静态页面，试图用分支展示静态页面解决，进一步修改配置文件部署部分到hexo分支，最后运行git push和github分支页面时均报错。  </p>
+</blockquote>
+<p>  <strong>排雷</strong>：Hexo 部署应该将静态博客文件部署到 master 分支或者您用于托管博客的主分支。这是博客的在线版本。另一方面，可以在 hexo 分支上管理 Hexo 博客的源文件、配置和原始内容。这个分支用于 Hexo 生成静态博客文件，但不直接用于部署。您可以使用 hexo d 或者其他 Hexo 部署命令来将生成的静态文件提交到 master 分支或其他托管博客的主分支。</p>
+
         </div>
         <footer class="article-footer">
             
 
 
 
-    <a data-url="http://example.com/2023/09/06/a-draft/" data-id="clm9bu1xk00018otr5mykeh02" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://example.com/2023/09/06/a-draft/" data-id="clm9gckqz0001kwtr0j7dgznt" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -449,7 +453,7 @@
 
 Hexo是一个基于Node.js的静态网站生成器，它能够将Markdown等格式的文本内容转化成静态网页，方便快速构建博客或其他类型的静态网站。
 2.文件架构123456789├── node_modules：    #依赖包-安装插件及所需nodejs模块。├── public            #最终网页信",
-        "wordCount": 634
+        "wordCount": 665
     }
 </script>
 
