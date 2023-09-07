@@ -296,13 +296,66 @@ git push
 ```
 ---
 # 四、相关脚本
+“一键保存”
+```
+import subprocess
+import os
 
+# 设置 Hexo 项目的目录路径
+hexo_project_directory = r"D:\BLOG\branch\XIciA.github.io"
+# 切换到 Hexo 项目目录
+os.chdir(hexo_project_directory)
+# 获取当前工作目录的路径
+current_directory = os.getcwd()
+print("Path:",current_directory)
+
+commit_message = input("Please enter Git submit description:")
+# 定义要执行的命令列表
+commands = [
+    'hexo clean',  
+    'hexo generate',  
+    'hexo deploy', 
+    'git add .',
+    'git add .',
+    f'git commit -m "{commit_message}"',
+    'git push',
+    'git log',
+]
+
+# 使用 subprocess 执行命令
+try:
+    for cmd in commands:
+        print(f"Running: {cmd}")
+        result = subprocess.run(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, check=True)
+        print(f"Result: {result.stdout}")
+    print('Successful Completion')
+except subprocess.CalledProcessError as e:
+    # 如果命令执行失败，打印错误信息
+    print(f"Error running command: {e}")
+```
 
 # 五、踩雷与排雷
 ## 1.静态博客在线版本与源文件的Git管理
- >**踩雷**：master与branch,hexo deploy与git push,Git管理与静态页面混淆不清,导致分支上混子静态页面，试图用分支展示静态页面解决，进一步修改配置文件部署部分到hexo分支，最后运行git push和github分支页面时均报错。  
+ **踩雷**：master与branch,hexo deploy与git push,Git管理与静态页面混淆不清,导致分支上混子静态页面，试图用分支展示静态页面解决，进一步修改配置文件部署部分到hexo分支，最后运行git push和github分支页面时均报错。  
   
   **排雷**：Hexo 部署应该将静态博客文件部署到 master 分支或者您用于托管博客的主分支。这是博客的在线版本。另一方面，可以在 hexo 分支上管理 Hexo 博客的源文件、配置和原始内容。这个分支用于 Hexo 生成静态博客文件，但不直接用于部署。您可以使用 hexo d 或者其他 Hexo 部署命令来将生成的静态文件提交到 master 分支或其他托管博客的主分支。
 
+## 2.消除`git add`产生的一种warning
+**踩雷**：windows平台进行 `git add` 时，控制台打印警告`LF will be replaced by CRLF the next time Git touches it
+`
 
 
+
+
+**排雷**:这个警告是由于你的 Git 配置中设置了自动换行 (line endings) 规则，但是在你的项目中发现了与该规则不符的文件。这个警告意味着 Git 将会在下一次操作时更改这些文件的换行符。要解决这个问题，你可以在项目的根目录中创建一个名为 .gitattributes 的文件，并在其中指定换行符的规则。例如，如果你想在整个项目中使用 LF 换行符，可以添加以下内容：
+```
+* text eol=lf
+```
+这将告诉 Git 对所有文本文件使用 LF 换行符。然后，提交这个 .gitattributes 文件到你的版本控制系统，以确保团队中的所有人都使用相同的换行符规则。在添加了 .gitattributes 文件后，你可能需要重新执行一次 git add . 来重新标记那些文件，然后提交它们。这样可以确保在以后的提交中使用正确的换行符规则。需要注意的是，如果你在 Windows 上使用文本编辑器，它可能会自动将文件保存为 CRLF 格式。你可以在编辑器的设置中查找选项，以确保它以 LF 格式保存文件，或者手动更改文件的换行符格式。这可以帮助减少 Git 警告的出现。
+
+# 六、一点感受
+>雷军：知识不全是线性的，大部分是网状的，知识点之间也不一定有绝对的先后关系，前面的内容看不懂，跳过去，并不影响学后面的；后面的学会了，有时候更容易看懂前面的。
+
+说点什么
+
+>Alex:程序员看重的不仅仅是成功解决问题，代码的健壮性与可扩张性更能体现能力。
