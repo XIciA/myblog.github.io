@@ -8,7 +8,7 @@ thumbnail: ../images/catH.png
 
 
 
-12345
+I KNOW
 # 一、关于Hexo
 ## 1.简介
 **什么是Hexo？**
