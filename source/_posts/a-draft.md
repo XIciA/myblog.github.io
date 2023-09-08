@@ -392,7 +392,7 @@ commands = [
 try:
     for cmd in commands:
         print(f"Running: {cmd}")
-        result = subprocess.run(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, check=True)
+        result = subprocess.run(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, check=True,encoding='utf-8')
         print(f"Result: {result.stdout}")
     print('Successful Completion')
 except subprocess.CalledProcessError as e:
@@ -490,6 +490,15 @@ except subprocess.CalledProcessError as e:
 ```
 这将告诉 Git 对所有文本文件使用 LF 换行符。然后，提交这个 .gitattributes 文件到你的版本控制系统，以确保团队中的所有人都使用相同的换行符规则。在添加了 .gitattributes 文件后，你可能需要重新执行一次 git add . 来重新标记那些文件，然后提交它们。这样可以确保在以后的提交中使用正确的换行符规则。需要注意的是，如果你在 Windows 上使用文本编辑器，它可能会自动将文件保存为 CRLF 格式。你可以在编辑器的设置中查找选项，以确保它以 LF 格式保存文件，或者手动更改文件的换行符格式。这可以帮助减少 Git 警告的出现。
 
+## 自动化脚本运行`hexo g`报错
+
+**踩雷**：自动化脚本运行`hexo g`报错`UnicodeDecodeError: 'gbk' codec can't decode byte 0x80 in position 569: illegal multibyte sequence`
+
+**排雷**:`subprocess.run(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, check=True,encoding='utf-8')`加上了最后的`encoding='utf-8'`
+
+GBK（Guojia Biaozhun Kuozhan）和UTF-8（Unicode Transformation Format - 8-bit）都是字符编码标准，用于在计算机上表示文本字符的方式。  
+GBK（Guojia Biaozhun Kuozhan）是一种字符编码标准，主要用于中文字符集，特别是汉字。它采用不定长编码，通常一个汉字占用2个字节，而英文字符只占用1个字节。GBK编码适用于中文环境，但无法涵盖全球字符集，因此在国际化应用中存在限制。  
+UTF-8（Unicode Transformation Format - 8-bit）是一种通用的字符编码方式，能够表示世界上几乎所有的字符，包括各种语言的文字、符号和特殊字符。它采用不定长编码，一个字符可以占用1到4个字节，因此具有灵活性和国际化兼容性。UTF-8已成为全球互联网标准，适用于多语言和跨平台应用。
 
 ---
 # 一点感受
