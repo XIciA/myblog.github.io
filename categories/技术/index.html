@@ -6,17 +6,15 @@
     
 
     
-    <title>coffee | My Blog</title>
+    <title>分类: 技术 | My Blog</title>
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <meta property="og:type" content="website">
-<meta property="og:title" content="coffee">
-<meta property="og:url" content="http://example.com/coffee/index.html">
+<meta property="og:title" content="My Blog">
+<meta property="og:url" content="http://example.com/categories/%E6%8A%80%E6%9C%AF/index.html">
 <meta property="og:site_name" content="My Blog">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-09-06T14:56:22.000Z">
-<meta property="article:modified_time" content="2023-09-06T14:56:22.935Z">
 <meta property="article:author" content="Vapor">
 <meta name="twitter:card" content="summary">
     
@@ -147,128 +145,74 @@
                         <div class="main-body-header">
     <h1 class="header">
     
-    <em class="page-title-link" data-url="/coffee/index.html">coffee</em>
+    <i class="icon fa fa-folder-open"></i>分类: <em class="page-title-link">技术</em>
     </h1>
 </div>
 
                         <div class="main-body-content">
-                            <article id="page-" class="article article-single article-type-page" itemscope itemprop="blogPost">
-    <div class="article-inner">
+                            
+
+    
+    
         
-            <header class="article-header">
-                
+        
+        <section class="archives-wrap">
+            <div class="archive-year-wrap">
+                <a href="/archives/2023" class="archive-year"><i class="icon fa fa-calendar-o"></i>2023</a>
+            </div>
+            <div class="archives">
+    
+    
+    
+        <div class="article-row">
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <a href="/2023/09/06/a-draft/" class="thumbnail">
+    
+    
+        <span style="background-image:url(../images/catH.png)" alt="基于Github的Hexo博客搭建" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span><a href="http://example.com/2023/09/06/a-draft/#isso-thread"></a></span>
+    
+</span>
+
+
+    
+</a>
+
+        
+        <div class="article-meta">
+            <div class="category">
+            <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
+            </div>
+            <div class="date"><time datetime="2023-09-06T12:00:32.000Z" itemprop="datePublished">2023-09-06</time></div>
+        </div>
+        
     
         <h1 class="article-title" itemprop="name">
-        coffee
+        <a href="/2023/09/06/a-draft/">基于Github的Hexo博客搭建</a>
         </h1>
     
 
-            </header>
-        
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-            
-
-            
-
-            
-
-            
-        </div>
-        <footer class="article-footer">
-            
-
-
-
-    <a data-url="http://example.com/coffee/index.html" data-id="clmat4an50002fctrd9e79b8a" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
-<script>
-    (function ($) {
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-        </footer>
+        <p class="article-excerpt">
+            本文是一篇个人博客搭建笔记。选用Hexo作为静态博客框架，通过GitHub Pages 服务来托管 Hexo 生成的静态文件，以Git 作为版本控制系统。
+        </p>
     </div>
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "BlogPosting",
-        "author": {
-            "@type": "Person",
-            "name": "Vapor"
-        },
-        "headline": "coffee",
-        "image": "http://example.com",
-        
-        
-        "datePublished": "2023-09-06",
-        "dateCreated": "2023-09-06",
-        "dateModified": "2023-09-06",
-        "url": "http://example.com/coffee/index.html",
-        "description": "",
-        "wordCount": 1
-    }
-</script>
-
 </article>
-
-    <section id="comments">
     
-    </section>
+        </div>
+    
+
+
+    </div></section>
+
 
 
 
