@@ -359,7 +359,7 @@ commands = [
 try:
     for cmd in commands:
         print(f"Running: {cmd}")
-        result = subprocess.run(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, check=True)
+        result = subprocess.run(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, check=True,encoding='utf-8')
         print(f"Result: {result.stdout}")
     print('Successful Completion')
 except subprocess.CalledProcessError as e:
@@ -392,7 +392,7 @@ commands = [
 try:
     for cmd in commands:
         print(f"Running: {cmd}")
-        result = subprocess.run(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, check=True,encoding='utf-8')
+        result = subprocess.run(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, check=True)
         print(f"Result: {result.stdout}")
     print('Successful Completion')
 except subprocess.CalledProcessError as e:
