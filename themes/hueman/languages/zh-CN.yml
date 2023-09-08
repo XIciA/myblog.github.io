@@ -13,6 +13,7 @@ nav:
     total_page:
         other: '共 %d 页'
 sidebar:
+    sentence: '十点准时下班！'
     follow: '关注我 '
     newer: '下一篇'
     older: '上一篇'

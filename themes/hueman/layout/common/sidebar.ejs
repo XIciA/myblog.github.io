@@ -1,7 +1,9 @@
 <aside id="sidebar">
     <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
     <div class="sidebar-top">
-        <p><%= __('sidebar.follow') %>:</p>
+        <%# 这是单行注释 %>
+        <%# 这是单行注释(sidebar.follow并在%》后加冒号) %>
+        <p><%= __('sidebar.sentence') %></p>
         <ul class="social-links">
             <% for (var i in theme.customize.social_links) { %>
                 <% if (theme.customize.social_links[i]) { %>

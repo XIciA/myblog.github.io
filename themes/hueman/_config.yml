@@ -9,21 +9,21 @@ menu:
 # Customize
 customize:
     logo:
-        width: 165
-        height: 60
-        url: images/logo-header.png
+        width: 333
+        height: 55
+        url: images/vapor.png
     theme_color: '#006bde'
     highlight: androidstudio # go to hueman/source/css/_highlight folder to see available options.
     sidebar: left # sidebar position, options: left, right
     thumbnail: true # enable posts thumbnail, options: true, false
     favicon: # path to favicon
     social_links: # for more icons, please see http://fontawesome.io/icons/#brand
-        twitter: /
-        facebook: /
-        stack-overflow: /
-        github: https://github.com/ppoffice/hexo-theme-hueman
-        weibo: /
-        rss: /
+        #twitter: /
+        #facebook: /
+        #stack-overflow: /
+        #github: https://github.com/ppoffice/hexo-theme-hueman
+        #weibo: /
+        #rss: /
 
 # Widgets
 widgets:
@@ -123,4 +123,4 @@ miscellaneous:
     links:
         Hexo: http://hexo.io
 
-poweredby: true
+poweredby: false

@@ -316,7 +316,6 @@ commands = [
     'hexo generate',  
     'hexo deploy', 
     'git add .',
-    'git add .',
     f'git commit -m "{commit_message}"',
     'git push',
     'git log',
@@ -333,8 +332,22 @@ except subprocess.CalledProcessError as e:
     # 如果命令执行失败，打印错误信息
     print(f"Error running command: {e}")
 ```
+# 五、客制化笔记
 
-# 五、踩雷与排雷
+## 1.修改前段界面的关键路径
++ 汉化文件夹：`D:\BLOG\branch\XIciA.github.io\themes\hueman\languages\zh-CN.yml`
++ ejs文件夹：`D:\BLOG\branch\XIciA.github.io\themes\hueman\layout\common\post`
++ css文件夹：`D:\BLOG\branch\XIciA.github.io\themes\hueman\source\css\_partial`
+## 2.修改sidebar-top
++ 可在主题配置文件`D:\BLOG\branch\XIciA.github.io\themes\hueman\_config.yml`中的`social_links`进行基本的更改。这里注释掉所有相关功能，让其不再显示图标。
+
++ 在`D:\BLOG\branch\XIciA.github.io\themes\hueman\layout\common\sidebar.ejs`中修改`sidebar.follow`为`sidebar.sentence`并删除`</p>`前的冒号。
+
++ 在`D:\BLOG\branch\XIciA.github.io\themes\hueman\languages\zh-CN.yml`中的sidebar部分添加变量`sidebar.sentence`并加上自己喜欢的句子。
+
++ 可以在`D:\BLOG\branch\XIciA.github.io\themes\hueman\source\css\_partial\sidebar.styl`调整css样式。
+
+# 六、踩雷与排雷
 ## 1.静态博客在线版本与源文件的Git管理
  **踩雷**：master与branch,hexo deploy与git push,Git管理与静态页面混淆不清,导致分支上混子静态页面，试图用分支展示静态页面解决，进一步修改配置文件部署部分到hexo分支，最后运行git push和github分支页面时均报错。  
   
@@ -353,7 +366,7 @@ except subprocess.CalledProcessError as e:
 ```
 这将告诉 Git 对所有文本文件使用 LF 换行符。然后，提交这个 .gitattributes 文件到你的版本控制系统，以确保团队中的所有人都使用相同的换行符规则。在添加了 .gitattributes 文件后，你可能需要重新执行一次 git add . 来重新标记那些文件，然后提交它们。这样可以确保在以后的提交中使用正确的换行符规则。需要注意的是，如果你在 Windows 上使用文本编辑器，它可能会自动将文件保存为 CRLF 格式。你可以在编辑器的设置中查找选项，以确保它以 LF 格式保存文件，或者手动更改文件的换行符格式。这可以帮助减少 Git 警告的出现。
 
-# 六、一点感受
+# 七、一点感受
 >雷军：知识不全是线性的，大部分是网状的，知识点之间也不一定有绝对的先后关系，前面的内容看不懂，跳过去，并不影响学后面的；后面的学会了，有时候更容易看懂前面的。
 
 说点什么
