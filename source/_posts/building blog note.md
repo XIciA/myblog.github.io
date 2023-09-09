@@ -2,7 +2,9 @@
 title: 基于Github的Hexo博客搭建
 date: 2023-09-06 20:00:32
 tags: 
-categories: 技术
+categories:
+  - 一级分类
+  - 二级分类
 thumbnail: ../images/catH.png
 toc: true
 ---
