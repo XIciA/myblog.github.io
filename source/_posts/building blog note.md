@@ -1,7 +1,7 @@
 ---
 title: 基于Github的Hexo博客搭建
 date: 2023-09-06 20:00:32
-tags: 
+tags: 博客搭建
 categories: 技术
 thumbnail: https://vaporfigurebed.oss-cn-beijing.aliyuncs.com//blogimg/catH.png
 toc: true
@@ -175,7 +175,6 @@ npm install -g hexo-cli
 hexo -v
 ```
 + 初始化
-
 ```
 hexo init myblog
 cd myblog //进入这个myblog文件夹
@@ -202,7 +201,6 @@ git config user.name
 git config user.email
 ```
 + 创建ssh[^1]
-
 ```
 ssh-keygen -t rsa -C "youremail"
 ```
@@ -214,9 +212,6 @@ ssh -T git@github.com
  ```
 
 
-[^1]:SSH（Secure Shell）是一种加密网络协议，用于在不安全的网络中建立安全的远程连接。SSH协议的主要目的是通过加密和身份验证来保护数据的传输和远程访问。
-运行这个命令后，系统会生成一个RSA密钥对，包括一个私钥（默认保存在 ~/.ssh/id_rsa）和一个公钥（默认保存在 ~/.ssh/id_rsa.pub）。私钥是私有的，必须妥善保管，而公钥可以共享给其他人或远程服务器以进行身份验证。
-生成SSH密钥对后，你可以将公钥添加到远程服务器上，以便通过SSH进行安全的远程访问。私钥则会用于本地SSH客户端与远程服务器进行通信时的身份验证。
 + 打开站点配置文件 _config.yml，修改deploy部分为：
 ```
 deploy:
@@ -282,13 +277,11 @@ git push
 ## 发布文章
 
 + **创建草稿**：首先，在 Hexo 博客项目的根目录下，使用以下命令创建一篇新的草稿文章：
-
 ```
 hexo new draft my-new-draft
 ```
 
 + **发布草稿**：发布草稿： 当你准备好将草稿发布为一篇正式文章时，使用以下命令发布它：
-
 ```
 hexo publish draft my-new-draft
 ```
@@ -296,26 +289,22 @@ hexo publish draft my-new-draft
 
 
 + **生成静态网站文件**：在命令行中，进入你的 Hexo 项目的根目录，然后运行以下命令来生成静态网站文件：
-
 ```
 hexo generate
 ```
-
 这个命令会根据你在 Hexo 项目中的配置生成静态 HTML 文件和其他资源文件。生成的文件会存储在 Hexo 项目的 `public` 目录下。
 
 + **预览你的修改**（可选）：在生成静态文件后，你可以在本地预览你的网站，以确保修改没有问题。你可以使用以下命令启动本地服务器：
 ```
 hexo server
 ```
-
 然后在浏览器中访问 `http://localhost:4000` 来查看网站。
 
 + **部署你的网站**：一旦你确认修改没有问题，你可以使用以下命令来将网站部署到远程服务器或托管平台：
-
 ```
 hexo deploy
 ```
-这会自动将生成的静态文件推送到 GitHub Pages 上。如果你使用其他托管服务或者服务器，你需要相应地配置和执行部署命令。
+  这会自动将生成的静态文件推送到 GitHub Pages 上。如果你使用其他托管服务或者服务器，你需要相应地配置和执行部署命令。
 
 + **提交你的修改到 Git 仓库**：在你发布网站之后，确保将你的修改和生成的文件提交到你的 Git 仓库，以便跟踪网站的历史和与团队成员协作。你可以使用以下命令来提交：
 ```
@@ -323,15 +312,188 @@ git add .
 git commit -m "描述你的修改"
 git push 
 ```
+
 ---
+# 客制化笔记
+
+## 修改前段界面的关键路径
++ 汉化文件夹：`D:\BLOG\branch\XIciA.github.io\themes\hueman\languages\zh-CN.yml`
++ ejs文件夹：`D:\BLOG\branch\XIciA.github.io\themes\hueman\layout\common\post`
++ css文件夹：`D:\BLOG\branch\XIciA.github.io\themes\hueman\source\css\_partial`
+## 修改sidebar-top
++ 可在主题配置文件`D:\BLOG\branch\XIciA.github.io\themes\hueman\_config.yml`中的`social_links`进行基本的更改。这里注释掉所有相关功能，让其不再显示图标。
+
++ 在`D:\BLOG\branch\XIciA.github.io\themes\hueman\layout\common\sidebar.ejs`中修改`sidebar.follow`为`sidebar.sentence`并删除`</p>`前的冒号。
+
++ 在`D:\BLOG\branch\XIciA.github.io\themes\hueman\languages\zh-CN.yml`中的sidebar部分添加变量`sidebar.sentence`并加上自己喜欢的句子。
+
++ 可以在`D:\BLOG\branch\XIciA.github.io\themes\hueman\source\css\_partial\sidebar.styl`调整css样式。
+## 配置文章目录
+
++ 目录已经属于插件了，在hexo配置文件加入:
+  ```
+  plugins:      ## https://hexo.io/plugins/
+  - hexo-toc
+  ```
++ 并在`Front-matter `加入`toc: true`。
++ 如无法跳转则可能是hexo的toc版本冲突问题，需要删除原版toc：
+  ```
+  npm uninstall hexo-toc
+  ```
+## 文章摘要两种表示方法
++ 方法1：用`<!-- more -->`截断正文。
++ 方法2：在`Front-matter `加入`excerpt: `并输入内容。
+  
+## 插入图片 
+
+采用VSCode+PicGo+AliyunOss方案搭建Markdown图床。  
+插入图片操作步骤如下：
++ 在Vscode设置中进行picgo插件的配置，其中在bucket的路径如下：
+![20230910135609](https://vaporfigurebed.oss-cn-beijing.aliyuncs.com//blogimg/20230910135609.png)
++ 将图片存至剪切板，点击快捷键`ctrl+alt+U`可一键将图片上传至阿里云并粘贴图片url。
+## 插入公式
++ 卸载hexo-math
+  + 在hexo目录下使用下面的命令查看你是否已经安装了hexo-math插件：
+   ```
+   npm list hexo-math
+   ```
+  + 输入以下命令将hexo-math插件卸载:
+  ```
+  npm uninstall hexo-math --save
+  ```
++ 安装并配置hexo-filter-mathjax
+  + 输入以下命令安装hexo-filter-mathjax：
+  ```
+  npm list hexo-filter-mathjax
+  ```
+  + 检查是否安装成功：
+  ```
+  npm list hexo-filter-mathjax
+  ```
+  + 在```D:\BLOG\branch\XIciA.github.io\_config.yml```添加如下的代码：
+  ```
+  mathjax:
+  tags: none # or 'ams' or 'all'
+  single_dollars: true # enable single dollar signs as in-line math delimiters
+  cjk_width: 0.9 # relative CJK char width
+  normal_width: 0.6 # relative normal (monospace) width
+  append_css: true # add CSS to pages rendered by MathJax
+  every_page: false # if true, every page will be rendered by MathJax regardless the `mathjax` setting in Front-matter
+  ```
++ 安装公式渲染器
+  + hexo-math默认的公式渲染器是hexo-renderer-marked，它和markdown的语法有冲突，我们将其卸载，查看是否安装了hexo-renderer-marked公式渲染器：
+  ```
+  npm list hexo-renderer-marked
+  ```
+  + 如果安装了将其卸载：
+  ```
+  npm uninstall hexo-renderer-marked  --save
+  ```
+  + 然后我们安装一个新的公式渲染器，叫做hexo-renderer-kramed，它对hexo-renderer-marked进行了改进，在hexo目录下输入下面的命令安装：
+    ```
+    npm install hexo-renderer-kramed --save
+    ```
+  + 检查：
+    ```
+    npm list hexo-renderer-kramed
+    ```
+  + 在```D:\BLOG\branch\XIciA.github.io\node_modules\kramed\lib\rules\inline.js```做如下修改：
+    ```
+    //escape: /^\\([\\`*{}\[\]()#$+\-.!_>])/,
+    //修改为：
+    escape: /^\\([`*\[\]()#$+\-.!_>])/,
+
+    //em: /^\b_((?:__|[\s\S])+?)_\b|^\*((?:\*\*|[\s\S])+?)\*(?!\*)/,
+    //修改为
+    em: /^\*((?:\*\*|[\s\S])+?)\*(?!\*)/,
+    ```
+  + 在```D:\BLOG\branch\XIciA.github.io\themes\hueman\_config.yml```确保
+    ```
+    mathjax: true # options: true, false
+    ```
+
+
+
+## 添加脚注 
+
++ 安装 hexo-footnotes 插件：
+  ```
+  npm install hexo-footnotes --save
+  ```
++ 在 Hexo 项目的 _config.yml 文件中启用 hexo-footnotes 插件。确保在 plugins 部分添加了以下内容：
+  ```
+  plugins:
+  - hexo-footnotes
+  ```
+
+ 
+
+
+## 删除comment-counter小图标
+![20230910143743](https://vaporfigurebed.oss-cn-beijing.aliyuncs.com//blogimg/20230910143743.png)
+
+就是觉得不太好看，直接删除了`D:\BLOG\branch\XIciA.github.io\themes\hueman\layout\comment\counter.ejs`文件里的所有内容。不过以后如果想修改记得回来看。
+```
+<% if (post.comments) { %>
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    <% if (theme.comment.disqus) { %>
+        <span class="disqus-comment-count" data-disqus-identifier="<%= post.disqusId || '' %>" data-disqus-url="<%= post.permalink %>">0</span>
+    <% } else if (theme.comment.duoshuo) { %>
+        <span class="ds-thread-count" data-thread-key="<%= post.path %>">0</span>
+    <% } else if (theme.comment.isso) { %>
+        <span><a href="<%= post.permalink %>#isso-thread"></a></span>
+    <% } else if (theme.comment.facebook) { %>
+        <span class="fb-comments-count" data-href="<%= post.permalink %>">0</span>
+    <% } else if (theme.comment.changyan.on) { %>
+        <span class="cy_cmt_count" id="sourceId::<%= post.permalink %>">0</span>
+    <% } %>
+</span>
+<% } %>
+```
+
+
+
+---
+
+# 踩雷与排雷
+## 静态博客在线版本与源文件的Git管理
+ **踩雷**：master与branch,hexo deploy与git push,Git管理与静态页面混淆不清,导致分支上混子静态页面，试图用分支展示静态页面解决，进一步修改配置文件部署部分到hexo分支，最后运行git push和github分支页面时均报错。  
+  
+  **排雷**：Hexo 部署应该将静态博客文件部署到 master 分支或者您用于托管博客的主分支。这是博客的在线版本。另一方面，可以在 hexo 分支上管理 Hexo 博客的源文件、配置和原始内容。这个分支用于 Hexo 生成静态博客文件，但不直接用于部署。您可以使用 hexo d 或者其他 Hexo 部署命令来将生成的静态文件提交到 master 分支或其他托管博客的主分支。
+
+## 消除`git add`产生的一种warning
+**踩雷**：windows平台进行 `git add` 时，控制台打印警告`LF will be replaced by CRLF the next time Git touches it
+`
+
+
+
+
+**排雷**:这个警告是由于你的 Git 配置中设置了自动换行 (line endings) 规则，但是在你的项目中发现了与该规则不符的文件。这个警告意味着 Git 将会在下一次操作时更改这些文件的换行符。要解决这个问题，你可以在项目的根目录中创建一个名为 .gitattributes 的文件，并在其中指定换行符的规则。例如，如果你想在整个项目中使用 LF 换行符，可以添加以下内容：
+```
+* text eol=lf
+```
+这将告诉 Git 对所有文本文件使用 LF 换行符。然后，提交这个 .gitattributes 文件到你的版本控制系统，以确保团队中的所有人都使用相同的换行符规则。在添加了 .gitattributes 文件后，你可能需要重新执行一次 git add . 来重新标记那些文件，然后提交它们。这样可以确保在以后的提交中使用正确的换行符规则。需要注意的是，如果你在 Windows 上使用文本编辑器，它可能会自动将文件保存为 CRLF 格式。你可以在编辑器的设置中查找选项，以确保它以 LF 格式保存文件，或者手动更改文件的换行符格式。这可以帮助减少 Git 警告的出现。
+
+## 自动化脚本运行`hexo g`报错
+
+**踩雷**：自动化脚本运行`hexo g`报错`UnicodeDecodeError: 'gbk' codec can't decode byte 0x80 in position 569: illegal multibyte sequence`
+
+**排雷**:`subprocess.run(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, check=True,encoding='utf-8')`加上了最后的`encoding='utf-8'`
+
+GBK（Guojia Biaozhun Kuozhan）和UTF-8（Unicode Transformation Format - 8-bit）都是字符编码标准，用于在计算机上表示文本字符的方式。  
+GBK（Guojia Biaozhun Kuozhan）是一种字符编码标准，主要用于中文字符集，特别是汉字。它采用不定长编码，通常一个汉字占用2个字节，而英文字符只占用1个字节。GBK编码适用于中文环境，但无法涵盖全球字符集，因此在国际化应用中存在限制。  
+UTF-8（Unicode Transformation Format - 8-bit）是一种通用的字符编码方式，能够表示世界上几乎所有的字符，包括各种语言的文字、符号和特殊字符。它采用不定长编码，一个字符可以占用1到4个字节，因此具有灵活性和国际化兼容性。UTF-8已成为全球互联网标准，适用于多语言和跨平台应用。
+
+---
+
 # 自动化脚本
 
 以下为用于简化操作的python脚本：
 
 ## 同步云端功能
 
-  **completely save**:
-
+**completely save**:
 ```
 import subprocess
 import os
@@ -401,7 +563,7 @@ except subprocess.CalledProcessError as e:
     print(f"Error running command: {e}")
 ```
 ## 提交草稿功能
-+ **create draft**：
+**create draft**：
 ```
 import subprocess
 import os
@@ -440,82 +602,14 @@ except subprocess.CalledProcessError as e:
     # 如果命令执行失败，打印错误信息
     print(f"Error running command: {e}")
 ```
----
-# 客制化笔记
-
-## 修改前段界面的关键路径
-+ 汉化文件夹：`D:\BLOG\branch\XIciA.github.io\themes\hueman\languages\zh-CN.yml`
-+ ejs文件夹：`D:\BLOG\branch\XIciA.github.io\themes\hueman\layout\common\post`
-+ css文件夹：`D:\BLOG\branch\XIciA.github.io\themes\hueman\source\css\_partial`
-## 修改sidebar-top
-+ 可在主题配置文件`D:\BLOG\branch\XIciA.github.io\themes\hueman\_config.yml`中的`social_links`进行基本的更改。这里注释掉所有相关功能，让其不再显示图标。
-
-+ 在`D:\BLOG\branch\XIciA.github.io\themes\hueman\layout\common\sidebar.ejs`中修改`sidebar.follow`为`sidebar.sentence`并删除`</p>`前的冒号。
-
-+ 在`D:\BLOG\branch\XIciA.github.io\themes\hueman\languages\zh-CN.yml`中的sidebar部分添加变量`sidebar.sentence`并加上自己喜欢的句子。
-
-+ 可以在`D:\BLOG\branch\XIciA.github.io\themes\hueman\source\css\_partial\sidebar.styl`调整css样式。
-## 配置文章目录
-
-+ 目录已经属于插件了，在hexo配置文件加入:
-  ```
-  plugins:      ## https://hexo.io/plugins/
-  - hexo-toc
-  ```
-+ 并在`Front-matter `加入`toc: true`。
-+ 如无法跳转则可能是hexo的toc版本冲突问题，需要删除原版toc：
-  ```
-  npm uninstall hexo-toc
-  ```
-## 文章摘要两种表示方法
-+ 方法1：用`<!-- more -->`截断正文。
-+ 方法2：在`Front-matter `加入`excerpt: `并输入内容。
-  
-## 插入图片 
-
-采用VSCode+PicGo+AliyunOss方案搭建Markdown图床。  
-插入图片操作步骤如下：
-+ 在Vscode设置中进行picgo插件的配置，其中在bucket的路径如下：
-![20230910135609](https://vaporfigurebed.oss-cn-beijing.aliyuncs.com//blogimg/20230910135609.png)
-+ 将图片存至剪切板，点击快捷键`ctrl+alt+U`可一键将图片上传至阿里云并粘贴图片url。
-
-
----
-# 踩雷与排雷
-## 静态博客在线版本与源文件的Git管理
- **踩雷**：master与branch,hexo deploy与git push,Git管理与静态页面混淆不清,导致分支上混子静态页面，试图用分支展示静态页面解决，进一步修改配置文件部署部分到hexo分支，最后运行git push和github分支页面时均报错。  
-  
-  **排雷**：Hexo 部署应该将静态博客文件部署到 master 分支或者您用于托管博客的主分支。这是博客的在线版本。另一方面，可以在 hexo 分支上管理 Hexo 博客的源文件、配置和原始内容。这个分支用于 Hexo 生成静态博客文件，但不直接用于部署。您可以使用 hexo d 或者其他 Hexo 部署命令来将生成的静态文件提交到 master 分支或其他托管博客的主分支。
-
-## 消除`git add`产生的一种warning
-**踩雷**：windows平台进行 `git add` 时，控制台打印警告`LF will be replaced by CRLF the next time Git touches it
-`
-
-
-
-
-**排雷**:这个警告是由于你的 Git 配置中设置了自动换行 (line endings) 规则，但是在你的项目中发现了与该规则不符的文件。这个警告意味着 Git 将会在下一次操作时更改这些文件的换行符。要解决这个问题，你可以在项目的根目录中创建一个名为 .gitattributes 的文件，并在其中指定换行符的规则。例如，如果你想在整个项目中使用 LF 换行符，可以添加以下内容：
-```
-* text eol=lf
-```
-这将告诉 Git 对所有文本文件使用 LF 换行符。然后，提交这个 .gitattributes 文件到你的版本控制系统，以确保团队中的所有人都使用相同的换行符规则。在添加了 .gitattributes 文件后，你可能需要重新执行一次 git add . 来重新标记那些文件，然后提交它们。这样可以确保在以后的提交中使用正确的换行符规则。需要注意的是，如果你在 Windows 上使用文本编辑器，它可能会自动将文件保存为 CRLF 格式。你可以在编辑器的设置中查找选项，以确保它以 LF 格式保存文件，或者手动更改文件的换行符格式。这可以帮助减少 Git 警告的出现。
-
-## 自动化脚本运行`hexo g`报错
-
-**踩雷**：自动化脚本运行`hexo g`报错`UnicodeDecodeError: 'gbk' codec can't decode byte 0x80 in position 569: illegal multibyte sequence`
-
-**排雷**:`subprocess.run(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, check=True,encoding='utf-8')`加上了最后的`encoding='utf-8'`
-
-GBK（Guojia Biaozhun Kuozhan）和UTF-8（Unicode Transformation Format - 8-bit）都是字符编码标准，用于在计算机上表示文本字符的方式。  
-GBK（Guojia Biaozhun Kuozhan）是一种字符编码标准，主要用于中文字符集，特别是汉字。它采用不定长编码，通常一个汉字占用2个字节，而英文字符只占用1个字节。GBK编码适用于中文环境，但无法涵盖全球字符集，因此在国际化应用中存在限制。  
-UTF-8（Unicode Transformation Format - 8-bit）是一种通用的字符编码方式，能够表示世界上几乎所有的字符，包括各种语言的文字、符号和特殊字符。它采用不定长编码，一个字符可以占用1到4个字节，因此具有灵活性和国际化兼容性。UTF-8已成为全球互联网标准，适用于多语言和跨平台应用。
 
 ---
 # 一点感受
 + 有些真理一直都在你面前，但通过实践才能看清。学习就是不断从新事物里发现新知识和旧事物里发现新知识。
->雷军：知识不全是线性的，大部分是网状的，知识点之间也不一定有绝对的先后关系，前面的内容看不懂，跳过去，并不影响学后面的；后面的学会了，有时候更容易看懂前面的。
-
-
-+ 不懂就别乱整，抱着能跑就行的心态迟早出大问题。不是说不去尝试了，就像改配置deploy部分，把静态网页部署在源码库里，结果是暂时能够生成网页，但确是十分明显的错误。站在更高的层面才能看到这是很明显的错误，所以需要从底层开始去把问题弄懂，才能达到更高的层面。
+  >雷军：知识不全是线性的，大部分是网状的，知识点之间也不一定有绝对的先后关系，前面的内容看不懂，跳过去，并不影响学后面的；后面的学会了，有时候更容易看懂前面的。
   
->Alex:程序员看重的不仅仅是成功解决问题，代码的健壮性与可扩张性更能体现能力。
++ 不懂就别乱整，抱着能跑就行的心态迟早出大问题。不是说不去尝试了，就像改配置deploy部分，把静态网页部署在源码库里，结果是暂时能够生成网页，但确是十分明显的错误。站在更高的层面才能看到这是很明显的错误，所以需要从底层开始去把问题弄懂，才能达到更高的层面。
+  >Alex:程序员看重的不仅仅是成功解决问题，代码的健壮性与可扩张性更能体现能力。
+
+
+  [^1]:SSH（Secure Shell）是一种加密网络协议，用于在不安全的网络中建立安全的远程连接。SSH协议的主要目的是通过加密和身份验证来保护数据的传输和远程访问。运行这个命令后，系统会生成一个RSA密钥对，包括一个私钥（默认保存在 ~/.ssh/id_rsa）和一个公钥（默认保存在 ~/.ssh/id_rsa.pub）。私钥是私有的，必须妥善保管，而公钥可以共享给其他人或远程服务器以进行身份验证。生成SSH密钥对后，你可以将公钥添加到远程服务器上，以便通过SSH进行安全的远程访问。私钥则会用于本地SSH客户端与远程服务器进行通信时的身份验证。

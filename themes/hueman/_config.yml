@@ -106,7 +106,7 @@ plugins:
       sc_security: # enter security code
       public: # enter true if you want a link to your public stats. Must be configured on statcouter as well.
       on: # enter true to enable statcounter
-    mathjax: false # options: true, false
+    mathjax: true # options: true, false
     counter: false # for post words count and time of reading, need hexo-wordcount: https://github.com/willin/hexo-wordcount
     cookie_consent: false
     twitter_conversion_tracking:
@@ -123,3 +123,4 @@ miscellaneous:
         Hexo: http://hexo.io
 
 poweredby: false
+
