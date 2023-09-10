@@ -3,7 +3,6 @@ menu:
     Home: /
     # Delete this row if you don't want categories in your header nav bar
     Categories:
-    coffee: /coffee/index.html
     About: /about/index.html
 
 # Customize
@@ -76,8 +75,8 @@ comment:
         placeholder: Just Do It # enter the comment box placeholder
         avatar: identicon # (''/mm/identicon/monsterid/wavatar/retro/hide), more to see https://valine.js.org/avatar.html
         avatar_cdn: https://gravatar.loli.net/avatar/ # avatar CDN address, default gravatar.cat.net
-        pageSize: 10 # comments of one page
-        visitor: true # count reading numbers; If true, the numbers will also show below the title of every post
+        pageSize:  # comments of one page
+        visitor:  # count reading numbers; If true, the numbers will also show below the title of every post
         recordip: #false # If true, record commenter's ip, which is shown in LeanCloud pannel
     gitalk:
         on: # enter true to enable gitalk
