@@ -3,7 +3,7 @@ title: 基于Github的Hexo博客搭建
 date: 2023-09-06 20:00:32
 tags: 博客搭建
 categories: 技术
-thumbnail: https://vaporfigurebed.oss-cn-beijing.aliyuncs.com//blogimg/catH.png
+thumbnail: https://vaporfigurebed.oss-cn-beijing.aliyuncs.com//blogimg/1694372641315.jpg
 toc: true
 ---
 
