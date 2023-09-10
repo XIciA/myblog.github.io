@@ -19,12 +19,12 @@
 <meta property="og:site_name" content="My Blog">
 <meta property="og:description" content="本文是一篇个人博客搭建笔记。选用Hexo作为静态博客框架，通过GitHub Pages 服务来托管 Hexo 生成的静态文件，以Git 作为版本控制系统。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/2023/09/06/images/catH.png">
+<meta property="og:image" content="https://vaporfigurebed.oss-cn-beijing.aliyuncs.com//blogimg/catH.png">
 <meta property="article:published_time" content="2023-09-06T12:00:32.000Z">
-<meta property="article:modified_time" content="2023-09-09T05:17:31.254Z">
+<meta property="article:modified_time" content="2023-09-10T06:07:42.366Z">
 <meta property="article:author" content="Vapor">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2023/09/06/images/catH.png">
+<meta name="twitter:image" content="https://vaporfigurebed.oss-cn-beijing.aliyuncs.com//blogimg/catH.png">
     
 
     
@@ -87,12 +87,8 @@
                                     <a class="main-nav-list-link" href="/">主页</a>
                                 </li>
                             
-                                    <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/%E4%B8%80%E7%BA%A7%E5%88%86%E7%B1%BB/">一级分类</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/%E4%B8%80%E7%BA%A7%E5%88%86%E7%B1%BB/%E4%BA%8C%E7%BA%A7%E5%88%86%E7%B1%BB/">二级分类</a></li></ul></li></ul>
+                                    <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a></li></ul>
                                 
-                                <li class="main-nav-list-item" >
-                                    <a class="main-nav-list-link" href="/coffee/index.html">咖啡</a>
-                                </li>
-                            
                                 <li class="main-nav-list-item" >
                                     <a class="main-nav-list-link" href="/about/index.html">关于</a>
                                 </li>
@@ -153,7 +149,7 @@
                         <div class="main-body-header">
     <h1 class="header">
     
-    <a class="page-title-link" href="/categories/%E4%B8%80%E7%BA%A7%E5%88%86%E7%B1%BB/">一级分类</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/%E4%B8%80%E7%BA%A7%E5%88%86%E7%B1%BB/%E4%BA%8C%E7%BA%A7%E5%88%86%E7%B1%BB/">二级分类</a>
+    <a class="page-title-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
     </h1>
 </div>
 
@@ -185,7 +181,7 @@
 <div class="article-date">
   <i class="fa fa-calendar-plus-o"></i>
   <a href="/2023/09/06/building%20blog%20note/" class="article-date">
-     <time datetime="2023-09-09T05:17:31.254Z" itemprop="dateModified">2023-09-09</time>
+     <time datetime="2023-09-10T06:07:42.366Z" itemprop="dateModified">2023-09-10</time>
   </a>
 </div>
 
@@ -237,7 +233,7 @@
 <li><p>hexo plugins: 指一些能够扩展hexo的插件。插件可以按功能分成两类:</p>
 <ul>
 <li>扩展hexo命令的参数，如hexo-server(安装这个插件以后才能使用hexo server命令)</li>
-<li>扩展hexo解析文件的”能力”，如增加jade模版解析功能的hexo-render-jade插件<br><img src="/../images/hexo%20cmd.png" alt="命令总览"></li>
+<li>扩展hexo解析文件的”能力”，如增加jade模版解析功能的hexo-render-jade插件<br> <img src="https://vaporfigurebed.oss-cn-beijing.aliyuncs.com//blogimg/hexocmd.png" alt="hexocmd"></li>
 </ul>
 </li>
 </ul>
@@ -437,6 +433,11 @@
 <li>方法1：用<code>&lt;!-- more --&gt;</code>截断正文。</li>
 <li>方法2：在<code>Front-matter </code>加入<code>excerpt: </code>并输入内容。</li>
 </ul>
+<h2 id="插入图片"><a href="#插入图片" class="headerlink" title="插入图片"></a>插入图片</h2><p>采用VSCode+PicGo+AliyunOss方案搭建Markdown图床。<br>插入图片操作步骤如下：</p>
+<ul>
+<li>在Vscode设置中进行picgo插件的配置，其中在bucket的路径如下：<br><img src="https://vaporfigurebed.oss-cn-beijing.aliyuncs.com//blogimg/20230910135609.png" alt="20230910135609"></li>
+<li>将图片存至剪切板，点击快捷键<code>ctrl+alt+U</code>可一键将图片上传至阿里云并粘贴图片url。</li>
+</ul>
 <hr>
 <h1 id="踩雷与排雷"><a href="#踩雷与排雷" class="headerlink" title="踩雷与排雷"></a>踩雷与排雷</h1><h2 id="静态博客在线版本与源文件的Git管理"><a href="#静态博客在线版本与源文件的Git管理" class="headerlink" title="静态博客在线版本与源文件的Git管理"></a>静态博客在线版本与源文件的Git管理</h2><p> <strong>踩雷</strong>：master与branch,hexo deploy与git push,Git管理与静态页面混淆不清,导致分支上混子静态页面，试图用分支展示静态页面解决，进一步修改配置文件部署部分到hexo分支，最后运行git push和github分支页面时均报错。  </p>
 <p>  <strong>排雷</strong>：Hexo 部署应该将静态博客文件部署到 master 分支或者您用于托管博客的主分支。这是博客的在线版本。另一方面，可以在 hexo 分支上管理 Hexo 博客的源文件、配置和原始内容。这个分支用于 Hexo 生成静态博客文件，但不直接用于部署。您可以使用 hexo d 或者其他 Hexo 部署命令来将生成的静态文件提交到 master 分支或其他托管博客的主分支。</p>
@@ -467,7 +468,7 @@
 
 
 
-    <a data-url="http://example.com/2023/09/06/building%20blog%20note/" data-id="clmc6i1zf0004gwtr4h7rh6xa" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://example.com/2023/09/06/building%20blog%20note/" data-id="clmd2x8h30001n0tr1liwf5u8" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         $('body').on('click', function() {
@@ -538,15 +539,15 @@
             "name": "Vapor"
         },
         "headline": "基于Github的Hexo博客搭建",
-        "image": "http://example.com../images/catH.png",
+        "image": "http://example.comhttps://vaporfigurebed.oss-cn-beijing.aliyuncs.com//blogimg/catH.png",
         "keywords": "",
-        "genre": "一级分类 二级分类",
+        "genre": "技术",
         "datePublished": "2023-09-06",
         "dateCreated": "2023-09-06",
-        "dateModified": "2023-09-09",
+        "dateModified": "2023-09-10",
         "url": "http://example.com/2023/09/06/building blog note/",
         "description": "本文是一篇个人博客搭建笔记。选用Hexo作为静态博客框架，通过GitHub Pages 服务来托管 Hexo 生成的静态文件，以Git 作为版本控制系统。",
-        "wordCount": 1357
+        "wordCount": 1364
     }
 </script>
 
@@ -581,7 +582,7 @@
     <h3 class="widget-title">目录</h3>
     <div class="widget">
         <div id="toc" class="toc-article">
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%B3%E4%BA%8EHexo"><span class="toc-number">1.</span> <span class="toc-text">关于Hexo</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-number">1.1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E6%9E%B6%E6%9E%84"><span class="toc-number">1.2.</span> <span class="toc-text">文件架构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4%E6%80%BB%E8%A7%88"><span class="toc-number">1.3.</span> <span class="toc-text">命令总览</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%83%A8%E7%BD%B2%E6%B5%81%E7%A8%8B"><span class="toc-number">1.4.</span> <span class="toc-text">部署流程</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%B3%E4%BA%8EGithub"><span class="toc-number">2.</span> <span class="toc-text">关于Github</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B-1"><span class="toc-number">2.1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9C%A8%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2%E4%B8%AD%E7%9A%84%E4%B8%BB%E8%A6%81%E5%8A%9F%E8%83%BD"><span class="toc-number">2.2.</span> <span class="toc-text">在静态博客中的主要功能</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%B3%E4%BA%8EGit"><span class="toc-number">3.</span> <span class="toc-text">关于Git</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B-2"><span class="toc-number">3.1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%A1%E7%90%86%E6%9C%BA%E5%88%B6"><span class="toc-number">3.2.</span> <span class="toc-text">管理机制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-number">3.3.</span> <span class="toc-text">Git常用命令</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E6%AD%A5%E9%AA%A4"><span class="toc-number">4.</span> <span class="toc-text">操作步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85Git"><span class="toc-number">4.1.</span> <span class="toc-text">安装Git</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85nodejs"><span class="toc-number">4.2.</span> <span class="toc-text">安装nodejs</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85Hexo"><span class="toc-number">4.3.</span> <span class="toc-text">安装Hexo</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%86Hexo%E9%83%A8%E7%BD%B2%E5%88%B0Github"><span class="toc-number">4.4.</span> <span class="toc-text">将Hexo部署到Github</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Git%E5%88%86%E6%94%AF%E8%BF%9B%E8%A1%8C%E5%A4%9A%E7%BB%88%E7%AB%AF%E5%B7%A5%E4%BD%9C"><span class="toc-number">4.5.</span> <span class="toc-text">Git分支进行多终端工作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%91%E5%AE%9A%E5%9F%9F%E5%90%8D"><span class="toc-number">4.6.</span> <span class="toc-text">绑定域名</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%91%E5%B8%83%E6%96%87%E7%AB%A0"><span class="toc-number">4.7.</span> <span class="toc-text">发布文章</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%87%AA%E5%8A%A8%E5%8C%96%E8%84%9A%E6%9C%AC"><span class="toc-number">5.</span> <span class="toc-text">自动化脚本</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%8C%E6%AD%A5%E4%BA%91%E7%AB%AF%E5%8A%9F%E8%83%BD"><span class="toc-number">5.1.</span> <span class="toc-text">同步云端功能</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E8%8D%89%E7%A8%BF%E5%8A%9F%E8%83%BD"><span class="toc-number">5.2.</span> <span class="toc-text">创建草稿功能</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%90%E4%BA%A4%E8%8D%89%E7%A8%BF%E5%8A%9F%E8%83%BD"><span class="toc-number">5.3.</span> <span class="toc-text">提交草稿功能</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%A2%E5%88%B6%E5%8C%96%E7%AC%94%E8%AE%B0"><span class="toc-number">6.</span> <span class="toc-text">客制化笔记</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E5%89%8D%E6%AE%B5%E7%95%8C%E9%9D%A2%E7%9A%84%E5%85%B3%E9%94%AE%E8%B7%AF%E5%BE%84"><span class="toc-number">6.1.</span> <span class="toc-text">修改前段界面的关键路径</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9sidebar-top"><span class="toc-number">6.2.</span> <span class="toc-text">修改sidebar-top</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95"><span class="toc-number">6.3.</span> <span class="toc-text">配置文章目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E7%AB%A0%E6%91%98%E8%A6%81%E4%B8%A4%E7%A7%8D%E8%A1%A8%E7%A4%BA%E6%96%B9%E6%B3%95"><span class="toc-number">6.4.</span> <span class="toc-text">文章摘要两种表示方法</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%B8%A9%E9%9B%B7%E4%B8%8E%E6%8E%92%E9%9B%B7"><span class="toc-number">7.</span> <span class="toc-text">踩雷与排雷</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2%E5%9C%A8%E7%BA%BF%E7%89%88%E6%9C%AC%E4%B8%8E%E6%BA%90%E6%96%87%E4%BB%B6%E7%9A%84Git%E7%AE%A1%E7%90%86"><span class="toc-number">7.1.</span> <span class="toc-text">静态博客在线版本与源文件的Git管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B6%88%E9%99%A4git-add%E4%BA%A7%E7%94%9F%E7%9A%84%E4%B8%80%E7%A7%8Dwarning"><span class="toc-number">7.2.</span> <span class="toc-text">消除git add产生的一种warning</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%8A%A8%E5%8C%96%E8%84%9A%E6%9C%AC%E8%BF%90%E8%A1%8Chexo-g%E6%8A%A5%E9%94%99"><span class="toc-number">7.3.</span> <span class="toc-text">自动化脚本运行hexo g报错</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E7%82%B9%E6%84%9F%E5%8F%97"><span class="toc-number">8.</span> <span class="toc-text">一点感受</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%B3%E4%BA%8EHexo"><span class="toc-number">1.</span> <span class="toc-text">关于Hexo</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-number">1.1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E6%9E%B6%E6%9E%84"><span class="toc-number">1.2.</span> <span class="toc-text">文件架构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4%E6%80%BB%E8%A7%88"><span class="toc-number">1.3.</span> <span class="toc-text">命令总览</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%83%A8%E7%BD%B2%E6%B5%81%E7%A8%8B"><span class="toc-number">1.4.</span> <span class="toc-text">部署流程</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%B3%E4%BA%8EGithub"><span class="toc-number">2.</span> <span class="toc-text">关于Github</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B-1"><span class="toc-number">2.1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9C%A8%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2%E4%B8%AD%E7%9A%84%E4%B8%BB%E8%A6%81%E5%8A%9F%E8%83%BD"><span class="toc-number">2.2.</span> <span class="toc-text">在静态博客中的主要功能</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%B3%E4%BA%8EGit"><span class="toc-number">3.</span> <span class="toc-text">关于Git</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B-2"><span class="toc-number">3.1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%A1%E7%90%86%E6%9C%BA%E5%88%B6"><span class="toc-number">3.2.</span> <span class="toc-text">管理机制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-number">3.3.</span> <span class="toc-text">Git常用命令</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E6%AD%A5%E9%AA%A4"><span class="toc-number">4.</span> <span class="toc-text">操作步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85Git"><span class="toc-number">4.1.</span> <span class="toc-text">安装Git</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85nodejs"><span class="toc-number">4.2.</span> <span class="toc-text">安装nodejs</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85Hexo"><span class="toc-number">4.3.</span> <span class="toc-text">安装Hexo</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%86Hexo%E9%83%A8%E7%BD%B2%E5%88%B0Github"><span class="toc-number">4.4.</span> <span class="toc-text">将Hexo部署到Github</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Git%E5%88%86%E6%94%AF%E8%BF%9B%E8%A1%8C%E5%A4%9A%E7%BB%88%E7%AB%AF%E5%B7%A5%E4%BD%9C"><span class="toc-number">4.5.</span> <span class="toc-text">Git分支进行多终端工作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%91%E5%AE%9A%E5%9F%9F%E5%90%8D"><span class="toc-number">4.6.</span> <span class="toc-text">绑定域名</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%91%E5%B8%83%E6%96%87%E7%AB%A0"><span class="toc-number">4.7.</span> <span class="toc-text">发布文章</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%87%AA%E5%8A%A8%E5%8C%96%E8%84%9A%E6%9C%AC"><span class="toc-number">5.</span> <span class="toc-text">自动化脚本</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%8C%E6%AD%A5%E4%BA%91%E7%AB%AF%E5%8A%9F%E8%83%BD"><span class="toc-number">5.1.</span> <span class="toc-text">同步云端功能</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E8%8D%89%E7%A8%BF%E5%8A%9F%E8%83%BD"><span class="toc-number">5.2.</span> <span class="toc-text">创建草稿功能</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%90%E4%BA%A4%E8%8D%89%E7%A8%BF%E5%8A%9F%E8%83%BD"><span class="toc-number">5.3.</span> <span class="toc-text">提交草稿功能</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%A2%E5%88%B6%E5%8C%96%E7%AC%94%E8%AE%B0"><span class="toc-number">6.</span> <span class="toc-text">客制化笔记</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E5%89%8D%E6%AE%B5%E7%95%8C%E9%9D%A2%E7%9A%84%E5%85%B3%E9%94%AE%E8%B7%AF%E5%BE%84"><span class="toc-number">6.1.</span> <span class="toc-text">修改前段界面的关键路径</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9sidebar-top"><span class="toc-number">6.2.</span> <span class="toc-text">修改sidebar-top</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95"><span class="toc-number">6.3.</span> <span class="toc-text">配置文章目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E7%AB%A0%E6%91%98%E8%A6%81%E4%B8%A4%E7%A7%8D%E8%A1%A8%E7%A4%BA%E6%96%B9%E6%B3%95"><span class="toc-number">6.4.</span> <span class="toc-text">文章摘要两种表示方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%92%E5%85%A5%E5%9B%BE%E7%89%87"><span class="toc-number">6.5.</span> <span class="toc-text">插入图片</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%B8%A9%E9%9B%B7%E4%B8%8E%E6%8E%92%E9%9B%B7"><span class="toc-number">7.</span> <span class="toc-text">踩雷与排雷</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2%E5%9C%A8%E7%BA%BF%E7%89%88%E6%9C%AC%E4%B8%8E%E6%BA%90%E6%96%87%E4%BB%B6%E7%9A%84Git%E7%AE%A1%E7%90%86"><span class="toc-number">7.1.</span> <span class="toc-text">静态博客在线版本与源文件的Git管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B6%88%E9%99%A4git-add%E4%BA%A7%E7%94%9F%E7%9A%84%E4%B8%80%E7%A7%8Dwarning"><span class="toc-number">7.2.</span> <span class="toc-text">消除git add产生的一种warning</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%8A%A8%E5%8C%96%E8%84%9A%E6%9C%AC%E8%BF%90%E8%A1%8Chexo-g%E6%8A%A5%E9%94%99"><span class="toc-number">7.3.</span> <span class="toc-text">自动化脚本运行hexo g报错</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E7%82%B9%E6%84%9F%E5%8F%97"><span class="toc-number">8.</span> <span class="toc-text">一点感受</span></a></li></ol>
         </div>
     </div>
 </div>
@@ -600,7 +601,7 @@
                             <a href="/2023/09/06/building%20blog%20note/" class="thumbnail">
     
     
-        <span style="background-image:url(../images/catH.png)" alt="基于Github的Hexo博客搭建" class="thumbnail-image"></span>
+        <span style="background-image:url(https://vaporfigurebed.oss-cn-beijing.aliyuncs.com//blogimg/catH.png)" alt="基于Github的Hexo博客搭建" class="thumbnail-image"></span>
     
     
 </a>
@@ -608,7 +609,7 @@
                         </div>
                         
                         <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/%E4%B8%80%E7%BA%A7%E5%88%86%E7%B1%BB/">一级分类</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/%E4%B8%80%E7%BA%A7%E5%88%86%E7%B1%BB/%E4%BA%8C%E7%BA%A7%E5%88%86%E7%B1%BB/">二级分类</a></p>
+                            <p class="item-category"><a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a></p>
                             <p class="item-title"><a href="/2023/09/06/building%20blog%20note/" class="title">基于Github的Hexo博客搭建</a></p>
                             <p class="item-date"><time datetime="2023-09-06T12:00:32.000Z" itemprop="datePublished">2023-09-06</time></p>
                         </div>
@@ -623,7 +624,7 @@
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">分类</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%80%E7%BA%A7%E5%88%86%E7%B1%BB/">一级分类</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%80%E7%BA%A7%E5%88%86%E7%B1%BB/%E4%BA%8C%E7%BA%A7%E5%88%86%E7%B1%BB/">二级分类</a><span class="category-list-count">1</span></li></ul></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a><span class="category-list-count">1</span></li></ul>
         </div>
     </div>
 
