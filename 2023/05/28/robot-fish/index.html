@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+
+    
+
+    
+    <title>高速三尾智能机器鱼设计 | My Blog</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="智能设计" />
+    
+    <meta name="description" content="本项目的关键技术包括3D建模技术、舵机控制技术、巡线算法设计、漏油点检测算法设计、图像处理技术、报警技术和仿真分析技术。3D建模技术可以构建出理想的原型样机。舵机控制技术是保证鱼尾能够实现动态平衡和灵活运动的关键技术。巡线算法设计采用对比度算法进行巡线，并且对管道进行提取和消除反光处理，实现了对管道的快速准确的检测和跟踪。漏油点检测算法设计采用了一种基于RGB模型的算法，可以将漏油点从背景中分">
+<meta property="og:type" content="article">
+<meta property="og:title" content="高速三尾智能机器鱼设计">
+<meta property="og:url" content="http://example.com/2023/05/28/robot-fish/index.html">
+<meta property="og:site_name" content="My Blog">
+<meta property="og:description" content="本项目的关键技术包括3D建模技术、舵机控制技术、巡线算法设计、漏油点检测算法设计、图像处理技术、报警技术和仿真分析技术。3D建模技术可以构建出理想的原型样机。舵机控制技术是保证鱼尾能够实现动态平衡和灵活运动的关键技术。巡线算法设计采用对比度算法进行巡线，并且对管道进行提取和消除反光处理，实现了对管道的快速准确的检测和跟踪。漏油点检测算法设计采用了一种基于RGB模型的算法，可以将漏油点从背景中分">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://vaporfigurebed.oss-cn-beijing.aliyuncs.com//blogimg/fm.png">
+<meta property="article:published_time" content="2023-05-27T17:02:03.000Z">
+<meta property="article:modified_time" content="2023-09-10T18:37:19.028Z">
+<meta property="article:author" content="Vapor">
+<meta property="article:tag" content="智能设计">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://vaporfigurebed.oss-cn-beijing.aliyuncs.com//blogimg/fm.png">
+    
+
+    
+
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/titillium-web/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+<script src="/libs/jquery/3.5.0/jquery.min.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+    
+    
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">主页</a>
+                                </li>
+                            
+                                    <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a></li></ul>
+                                
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/index.html">关于</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-robot-fish" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        高速三尾智能机器鱼设计
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2023/05/28/robot-fish/" class="article-date">
+       <time datetime="2023-05-27T17:02:03.000Z" itemprop="datePublished">2023-05-28</time>
+    </a>
+  </div>
+
+
+<div class="article-date">
+  <i class="fa fa-calendar-plus-o"></i>
+  <a href="/2023/05/28/robot-fish/" class="article-date">
+     <time datetime="2023-09-10T18:37:19.028Z" itemprop="dateModified">2023-09-11</time>
+  </a>
+</div>
+
+
+                
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/%E6%99%BA%E8%83%BD%E8%AE%BE%E8%AE%A1/" rel="tag">智能设计</a>
+    </div>
+
+                
+
+                
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            
+
+            
+
+            
+
+            <span id="more"></span>
+<hr>
+<p>本项目的关键技术包括3D建模技术、舵机控制技术、巡线算法设计、漏油点检测算法设计、图像处理技术、报警技术和仿真分析技术。3D建模技术可以构建出理想的原型样机。舵机控制技术是保证鱼尾能够实现动态平衡和灵活运动的关键技术。巡线算法设计采用对比度算法进行巡线，并且对管道进行提取和消除反光处理，实现了对管道的快速准确的检测和跟踪。漏油点检测算法设计采用了一种基于RGB模型的算法，可以将漏油点从背景中分离出来，并进行检测和统计。图像处理技术中的图像分割和区域处理等关键技术也为巡线算法提高了运算速度。报警技装置包括LCD显示屏、扬声器和小旗子等。仿真分析技术在实际运行和调试过程中对作品进行了进一步优化。机器鱼通过视觉模块进行巡线和漏油点检查，通过语音播报、液晶显示屏变化进行漏油点警告和统计，启动方式为WIFI远程启动，停止方式为视觉识别自动停止。<br><!-- more --></p>
+<hr>
+<h1 id="研究背景"><a href="#研究背景" class="headerlink" title="研究背景"></a>研究背景</h1><p>海洋石油污染是海洋污染中主要而复杂的污染问题之一。进入海洋环境的石油种类和途径很多,例如海洋石油勘探、开采和冶炼、海事溢油和船驳排污,以及陆源工业废物的海洋排放等,各种不同方式输入到海洋环境中油的种类各不相同,对海洋环境的危害程度和污染处理技术上的复杂程度也千差万别,因而使之成为海洋环境保护的一大难题<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>。<br>因此，设计一种能够快速准确地检测漏油的机器人具有重要意义。该机器人能够检测出漏油源的位置和漏油的数量，并及时采取措施，以减少漏油对环境和人类的影响。</p>
+<hr>
+<h1 id="设计方案"><a href="#设计方案" class="headerlink" title="设计方案"></a>设计方案</h1><h2 id="硬件结构"><a href="#硬件结构" class="headerlink" title="硬件结构"></a>硬件结构</h2><p>仿生机器鱼通常参照鱼类游动的推进机理，利用机械、电子元器件或智能材料来实现水下推进的运动装置<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup>。本研究的三尾鱼硬件结构包括五个部分：控制装置、视觉装置、动力装置、报警装置和供电装置。树莓派4B是控制装置的核心，完成处理摄像头采集的数据，检测漏油点，控制舵机和发出警报等任务。视觉装置由摄像头负责巡线和检测漏油点等任务。动力装置由三个舵机和橡胶仿生鱼尾组成，通过控制舵机旋转来控制鱼尾的运动。报警装置由LCD显示屏、扬声器和小旗组成，用于显示漏油点数量，发出声音警报和视觉提示。供电装置采用锂电池，并加入稳压器和低压报警器保证电路板正常工作。3D模型概念图如图1所示，实物图如图2所示。<br><img src="https://vaporfigurebed.oss-cn-beijing.aliyuncs.com//blogimg/图1三尾鱼3D模型.png" alt="图1 三尾鱼3D模型"><br><img src="https://vaporfigurebed.oss-cn-beijing.aliyuncs.com//blogimg/图2三尾鱼实物样机.png" alt="图2 三尾鱼实物样机"></p>
+<h2 id="模型与算法"><a href="#模型与算法" class="headerlink" title="模型与算法"></a>模型与算法</h2><h3 id="多进程"><a href="#多进程" class="headerlink" title="多进程"></a>多进程</h3><p>本研究使用了 Python 的 multiprocessing 模块，实现了多进程通信。具体来说，本研究创建write_process和read_process两个进程，分别执行 action_1 和 action_2 函数。这两个函数通过一个  对象进行通信，其中 action_1 函数不断地读取摄像头数据，处理后实现漏油点警告并输出运动信息t，并将结果t存储在  中，而action_2 函数则从  中读取数据t并执行相关运动程序。<br>通过多进程的方式，可以让action_1 和action_2 函数并行地执行，提高了程序的效率和可靠性。同时，由于两个进程之间通过 进行通信，实现了数据的共享，使得程序的实现更加灵活和可扩展。实现原理如图3所示。<br><img src="https://vaporfigurebed.oss-cn-beijing.aliyuncs.com//blogimg/图3代码框架及流程图.png" alt="图3 代码框架及流程图"></p>
+<h3 id="音频报警算法"><a href="#音频报警算法" class="headerlink" title="音频报警算法"></a>音频报警算法</h3><p>本研究通过音频播报的方式来进行漏油点的警告，当检测到漏油点时，触发audio(p)函数运行.wav文件。<br>函数audio(p)是播放音频文件。它有一个参数 ，表示音频文件的文件名（不包括文件扩展名），例如，如果要播放名为 music.wav 的音频文件，那么  的值应该是 music。在函数体内，首先使用 pathlib 库中的 Path 函数生成音频文件的路径，这里使用了 f-string 格式化字符串语法，将参数  插入到字符串中生成完整路径，例如 music.wav。然后，使用 OMXPlayer 播放器来播放音频文件。OMXPlayer 是一个基于 OpenMAX IL 接口的命令行媒体播放器，可以在树莓派上播放音频和视频文件。在这里，使用 OMXPlayer 的构造函数来创建一个 player 对象，并将音频文件路径作为参数传递给它。最后，调用 player 对象的 Stop() 方法来停止播放器。这个方法会停止当前正在播放的音频文件，并释放相关资源。</p>
+<h3 id="视频显示算法"><a href="#视频显示算法" class="headerlink" title="视频显示算法"></a>视频显示算法</h3><p>本研究采用LCD显示屏统计漏油点个数，当检测到漏油点时，触发screen(p)刷新屏内容，达到实时展示已经被检测到的漏油点个数的效果。<br>函数screen(p)用于在树莓派上连接的ST7789显示器上显示图像和文本。首先，代码使用Python标准库logging设置日志记录级别。然后，使用Pillow库中的ImageFont模块加载字体文件，并将其用于绘制文本。接着，使用try-except结构，在可能出现的错误情况下，代码将执行相应的异常处理。在try语句块中，调用名为ST7789的类，并使用Init()方法初始化显示器，使用clear()方法清除屏幕上的任何内容。接下来，代码创建一个图像对象，并将其填充为白色。然后，代码打开一张名为p.img将其粘贴到图像对象的左上角。接着，代码创建一个ImageDraw对象，并使用text()方法将文本插入到图像对象中。最后，代码使用rotate()方法将图像翻转180度，并使用ShowImage()方法将其显示在显示器上。如果用户按下Ctrl-C键，则将记录一条日志信息，然后退出程序。</p>
+<h3 id="巡线功能算法"><a href="#巡线功能算法" class="headerlink" title="巡线功能算法"></a>巡线功能算法</h3><p>本研究对比度算法进行巡线，首先提取图片四个角落的像素点作为基准点确定水面参考色域，然后根据管道与参考色域的对比度提取管道，在对管道进行精准定位后算出管道质心，最后通过质心所在的位置判定运动信息。最终处理效果如下图4所示。<br><img src="https://vaporfigurebed.oss-cn-beijing.aliyuncs.com//blogimg/图4巡线功能算法图像处理效果.jpg" alt="图4 巡线功能算法图像处理效果"></p>
+<ol>
+<li><strong>确定水面参考色域</strong><br>首先选取特定行列进行色域分析，转换为HSV色域。选择四角的四个参考点，转换为HSV并计算与蓝色参考色域的差值。遍历参考点数组，更新差值更小的点为当前参考点，选择与参考色域最接近的点作为最终参考色域$[H_{0}, S_{0}, V_{0}]$。</li>
+<li><p><strong>提取管道位置</strong><br>首先提取像素点在 HSV 色域中的 S 值，计算其与参考点的差值。用 inRange 函数，将中 S 值小于参考点80的像素点设为0，再将 中 S 值小于30的像素点设为0。最后对 和  进行逐像素乘法，得到去除蓝色和反光的结果，成功提取管道。</p>
+<script type="math/tex; mode=display">
+\begin{cases}
+m_1 = \begin{cases}
+1, & 80 \leq S_{i,j} - S_0 \leq 255 \\
+0, & 0 \leq S_{i,j} - S_0 < 80
+\end{cases} \\
+m_2 = \begin{cases}
+1, & 30 \leq S_{i,j} \leq 255 \\
+0, & 0 \leq S_{i,j} - S_0 < 30
+\end{cases} \\
+m = \sum_{i,j} (m_{1_{i,j}} \cdot m_{2_{i,j}})
+\end{cases}</script></li>
+<li><p><strong>计算管道质心</strong><br>首先确定目标检测行，再计算每行目标像素数量。将每一行的质心横坐标的质心横坐标的平均值，并将对应的 Y 中的值求平均。则目标的质心坐标为$(pos_x,pos_y)$:</p>
+<script type="math/tex; mode=display">
+\begin{cases}
+pos_x = \frac{1}{k} \sum_{i=1}^{k} \frac{1}{n} \sum_{j=1}^{n} x_j \\
+pos_y = \frac{1}{k} \sum_{i=1}^{k} Y_i
+\end{cases}</script></li>
+<li><strong>判定运动信息</strong><br>本研究采用极坐标系来判断运动信息。首先，以图像中心$(x_0,y_0 )$为原点，建立极坐标系。已知质心坐标为 $(pos_x,pos_y)$，则其极坐标为 $(ρ,θ)$，其中:<script type="math/tex; mode=display">
+\begin{cases}
+pos_x = \frac{1}{k} \sum_{i=1}^{k} \frac{1}{n} \sum_{j=1}^{n} x_j \\
+pos_y = \frac{1}{k} \sum_{i=1}^{k} Y_i
+\end{cases}</script>运动信息与极坐标(ρ,θ)的对应关系如下图5所示。<img src="https://vaporfigurebed.oss-cn-beijing.aliyuncs.com//blogimg/图5运动信息判定示意图.png" alt="图5 运动信息判定示意图"></li>
+</ol>
+<h3 id="漏油点检测功能算法"><a href="#漏油点检测功能算法" class="headerlink" title="漏油点检测功能算法"></a>漏油点检测功能算法</h3><p>本研究使用BGR阈值限制，判断像素是否为漏油点。使用inRange函数得到二值图像n1和n2，元素级别与运算得到像素总数n。通过滑动窗口计算最近10个检测到的漏油点像素总数，若大于等于40，触发声音报警和屏幕报警。</p>
+<script type="math/tex; mode=display">
+\begin{cases}
+n_1 = \begin{cases}
+1, & 0 \leq B_{i,j} - G_{i,j} \leq 20 \\
+0, & B_{i,j} - G_{i,j} > 20
+\end{cases} \\
+n_2 = \begin{cases}
+1, & 0 \leq B_{i,j} - G_{i,j} \leq 20 \\
+0, & B_{i,j} - G_{i,j} > 20
+\end{cases} \\
+n = \sum_{i,j} (n_{1_{i,j}} \cdot n_{2_{i,j}})
+\end{cases}</script><h3 id="运动控制算法"><a href="#运动控制算法" class="headerlink" title="运动控制算法"></a>运动控制算法</h3><p>本研究使用了脉冲宽度调制PWM技术，舵机的控制信号占空比范围为[2.5%,12.5%]，占空比ε的变化与舵机的单边转动角度φ线性关系如下所示。</p>
+<script type="math/tex; mode=display">
+\epsilon = \frac{45 + \phi}{18}</script><p>尾鳍摆动幅值和频率是影响尾鳍推进仿生机器鱼游动速度的重要因素<sup id="fnref:3"><a href="#fn:3" rel="footnote">3</a></sup>。本研究通过中立位置占空比w和单边转动角度φ来决定占空比ε的大小。在相同的运动学参数下，振幅不变的鱼鳍波动模式产生更大的推进力，具有更高的游动稳定性<sup id="fnref:4"><a href="#fn:4" rel="footnote">4</a></sup>。如图6所示。<br><img src="https://vaporfigurebed.oss-cn-beijing.aliyuncs.com//blogimg/图6舵机控制示意图.png" alt="图6 舵机控制示意图"></p>
+<h3 id="运动模型及性能分析"><a href="#运动模型及性能分析" class="headerlink" title="运动模型及性能分析"></a>运动模型及性能分析</h3><ul>
+<li><p><strong>建立运动模型</strong>    </p>
+<p>  关于鱼类运动的流体力学原理的研究，有助于实现高效推进下如何保持高机动性，稳定性等问题<sup id="fnref:5"><a href="#fn:5" rel="footnote">5</a></sup>。基于牛顿第二定律，通过对三尾鱼运动时的受力进行分析，可建立三尾鱼的运动模型如下所示，</p>
+<script type="math/tex; mode=display">
+\begin{cases}
+(F_6 + F_5D + F_4)\cos\theta - (F_1 + F_2D + F_3)\sin\theta + F_7 = m\cdot a_x \\
+(F_1 + F_2D + F_3)\cos\theta - (F_6 + F_5D + F_4)\sin\theta + F_7 = m\cdot a_y \\
+M_1 + M_2 + M_3 + M_4 + M_5 + M_6 + M_7 = m\cdot J
+\end{cases}</script><p><img src="https://vaporfigurebed.oss-cn-beijing.aliyuncs.com//blogimg/图7三尾鱼受力分析.png" alt="图7 三尾鱼受力分析"></p>
+</li>
+</ul>
+<ul>
+<li><strong>结果分析</strong><br>通过四阶龙格库塔法对微分方程组进行求解，可得三尾鱼不同运动状态下的运动轨迹与运动速度，如图8、图9所示，可知三尾鱼具有较高的机动性能。可得三尾鱼船头运动速度和运动角速度峰值分别约为$1 \times 10^{-3}$ rad和$1 \times 10^{-2}$ rad/s，如图10、图11所示，表明三尾鱼具有较强的横侧稳定性，且前端摄像头不易被干扰。<br><img src="https://vaporfigurebed.oss-cn-beijing.aliyuncs.com//blogimg/图8运动速度.png" alt="图8 运动速度"><br><img src="https://vaporfigurebed.oss-cn-beijing.aliyuncs.com//blogimg/图9运动轨迹.png" alt="图9 运动轨迹"><br><img src="https://vaporfigurebed.oss-cn-beijing.aliyuncs.com//blogimg/图10船头角度变化.png" alt="图10 船头角度变化"><br><img src="https://vaporfigurebed.oss-cn-beijing.aliyuncs.com//blogimg/图11船头角速度变化.png" alt="图11 船头角速度变化"></li>
+</ul>
+<hr>
+<h1 id="创新特色"><a href="#创新特色" class="headerlink" title="创新特色"></a>创新特色</h1><ol>
+<li>本作品采用3D建模技术设计出理想的原型样机，并结合实际制造出机器鱼原型，实现了从虚拟到实际的转化，提高了制作效率和准确性。  </li>
+<li>动力装置采用三个舵机及其仿生鱼尾，并且通过两侧舵机非镜像运行修正了由于中间鱼尾产生的偏流现象，相比传统单尾机器鱼，三个动力装置同时运行可产生更大和更稳定的动力，提高了机器鱼的横侧稳定性和速度。  </li>
+<li>巡线算法采用对比度算法提取管道并除去反光而不是传统的HSV模型，该算法中的颜色参考点随着环境的变化而变化，可以有效地解决管道颜色和环境光线变化带来的干扰，并且有效除去水面反光等干扰因素，提高了管道跟踪的准确率与便捷性。  </li>
+<li>本作品选取特定的关键行列进行图像处理，而不是遍历图片中所有像素点，加快了程序运算速度，提高了机器鱼的实时性和修正性能。  </li>
+<li>本作品通过仿真分析技术，使用四阶龙格库塔法求解微分方程组，将数据可视化并进一步优化，提高了作品的设计和优化效率。  </li>
+</ol>
+<hr>
+<h1 id="应用前景"><a href="#应用前景" class="headerlink" title="应用前景"></a>应用前景</h1><p>本作品具有广阔的推广前景。首先，在海洋漏油事故中，机器鱼的使用可以大大缩短响应时间，提高漏油点的定位和检测准确率，减少漏油造成的环境和经济损失。其次，该机器鱼可以应用于其他需要在水下环境进行检测和探索的领域，如水下管道维修、水下资源勘探等领域。最后，该机器鱼还可以应用于水下科学探索和教育领域，为学生和科研人员提供一个更加直观的水下观测和实验平台。因此，本作品的推广前景非常广阔，具有重要的社会和经济价值。</p>
+<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;">Dhavalikar Anagha S., Choudhari Pranali C.. Detection and Quantification of Daily Marine Oil Pollution Using Remote Sensing[J]. Water, Air, &amp; Soil Pollution, 2022, 233(8).</span><a href="#fnref:1" rev="footnote"> ↩</a></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">2.</span><span style="display: inline-block; vertical-align: top;">Tian Qunhong, Wang Tao, Wang Yunxia, Wang Zhiwei, Liu Cuiwei. A two-level optimization algorithm for path planning of bionic robotic fish in the three-dimensional environment with ocean currents and moving obstacles[J]. Ocean Engineering, 2022, 266(P3).</span><a href="#fnref:2" rev="footnote"> ↩</a></li><li id="fn:3"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">3.</span><span style="display: inline-block; vertical-align: top;">葛立明, 李宗刚. 尾鳍推进仿生机器鱼速度优化[J]. 兰州交通大学学报, 2016, 35(3): 18-23.</span><a href="#fnref:3" rev="footnote"> ↩</a></li><li id="fn:4"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">4.</span><span style="display: inline-block; vertical-align: top;">章永华, 何建慧. 仿生鱼鳍波动推进模式对游动性能影响的数值研究[J]. 机械科学与技术, 2013, 32(3): 435-440.</span><a href="#fnref:4" rev="footnote"> ↩</a></li><li id="fn:5"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">5.</span><span style="display: inline-block; vertical-align: top;">夏全新, 鲁传敬, 吴磊. 鱼类波状摆动推进的数值模拟[J]. 水动力学研究与进展：A辑, 2005(z1): 921-928.</span><a href="#fnref:5" rev="footnote"> ↩</a></li></ol></div></div>
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://example.com/2023/05/28/robot-fish/" data-id="clmdt8ty10002cktrddoo9kfx" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Vapor"
+        },
+        "headline": "高速三尾智能机器鱼设计",
+        "image": "http://example.comhttps://vaporfigurebed.oss-cn-beijing.aliyuncs.com//blogimg/fm.png",
+        "keywords": "智能设计",
+        "genre": "技术",
+        "datePublished": "2023-05-28",
+        "dateCreated": "2023-05-28",
+        "dateModified": "2023-09-11",
+        "url": "http://example.com/2023/05/28/robot-fish/",
+        "description": "
+
+本项目的关键技术包括3D建模技术、舵机控制技术、巡线算法设计、漏油点检测算法设计、图像处理技术、报警技术和仿真分析技术。3D建模技术可以构建出理想的原型样机。舵机控制技术是保证鱼尾能够实现动态平衡和灵活运动的关键技术。巡线算法设计采用对比度算法进行巡线，并且对管道进行提取和消除反光处理，实现了对管道的快速准确的检测和跟踪。漏油点检测算法设计采用了一种基于RGB模型的算法，可以将漏油点从背景中分",
+        "wordCount": 515
+    }
+</script>
+
+</article>
+
+    <section id="comments">
+    
+    </section>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        
+        
+        <p>十点准时下班！</p>
+        <ul class="social-links">
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2023/09/06/building%20blog%20note/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">下一篇</strong>
+        <p class="article-nav-title">
+        
+            基于Github的Hexo博客搭建
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+<div class="widget-wrap widget-list">
+    <h3 class="widget-title">目录</h3>
+    <div class="widget">
+        <div id="toc" class="toc-article">
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%A0%94%E7%A9%B6%E8%83%8C%E6%99%AF"><span class="toc-number">1.</span> <span class="toc-text">研究背景</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%A1%88"><span class="toc-number">2.</span> <span class="toc-text">设计方案</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A1%AC%E4%BB%B6%E7%BB%93%E6%9E%84"><span class="toc-number">2.1.</span> <span class="toc-text">硬件结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B%E4%B8%8E%E7%AE%97%E6%B3%95"><span class="toc-number">2.2.</span> <span class="toc-text">模型与算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E8%BF%9B%E7%A8%8B"><span class="toc-number">2.2.1.</span> <span class="toc-text">多进程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9F%B3%E9%A2%91%E6%8A%A5%E8%AD%A6%E7%AE%97%E6%B3%95"><span class="toc-number">2.2.2.</span> <span class="toc-text">音频报警算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%86%E9%A2%91%E6%98%BE%E7%A4%BA%E7%AE%97%E6%B3%95"><span class="toc-number">2.2.3.</span> <span class="toc-text">视频显示算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%A1%E7%BA%BF%E5%8A%9F%E8%83%BD%E7%AE%97%E6%B3%95"><span class="toc-number">2.2.4.</span> <span class="toc-text">巡线功能算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BC%8F%E6%B2%B9%E7%82%B9%E6%A3%80%E6%B5%8B%E5%8A%9F%E8%83%BD%E7%AE%97%E6%B3%95"><span class="toc-number">2.2.5.</span> <span class="toc-text">漏油点检测功能算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%90%E5%8A%A8%E6%8E%A7%E5%88%B6%E7%AE%97%E6%B3%95"><span class="toc-number">2.2.6.</span> <span class="toc-text">运动控制算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%90%E5%8A%A8%E6%A8%A1%E5%9E%8B%E5%8F%8A%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90"><span class="toc-number">2.2.7.</span> <span class="toc-text">运动模型及性能分析</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%9B%E6%96%B0%E7%89%B9%E8%89%B2"><span class="toc-number">3.</span> <span class="toc-text">创新特色</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E5%89%8D%E6%99%AF"><span class="toc-number">4.</span> <span class="toc-text">应用前景</span></a></li></ol>
+        </div>
+    </div>
+</div>
+
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2023/09/06/building%20blog%20note/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://vaporfigurebed.oss-cn-beijing.aliyuncs.com//blogimg/catH.png)" alt="基于Github的Hexo博客搭建" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a></p>
+                            <p class="item-title"><a href="/2023/09/06/building%20blog%20note/" class="title">基于Github的Hexo博客搭建</a></p>
+                            <p class="item-date"><time datetime="2023-09-06T12:00:32.000Z" itemprop="datePublished">2023-09-06</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2023/05/28/robot-fish/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://vaporfigurebed.oss-cn-beijing.aliyuncs.com//blogimg/fm.png)" alt="高速三尾智能机器鱼设计" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a></p>
+                            <p class="item-title"><a href="/2023/05/28/robot-fish/" class="title">高速三尾智能机器鱼设计</a></p>
+                            <p class="item-date"><time datetime="2023-05-27T17:02:03.000Z" itemprop="datePublished">2023-05-28</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">分类</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a><span class="category-list-count">2</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">九月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">五月 2023</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">标签</h3>
+        <div class="widget">
+            <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" rel="tag">博客搭建</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%99%BA%E8%83%BD%E8%AE%BE%E8%AE%A1/" rel="tag">智能设计</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" style="font-size: 10px;">博客搭建</a> <a href="/tags/%E6%99%BA%E8%83%BD%E8%AE%BE%E8%AE%A1/" style="font-size: 10px;">智能设计</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">链接</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2023 Vapor</p>
+                
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+    </div>
+    
+
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+        </script>
+        
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML.js"></script>
+
+    
+
+    
+    
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+</body>
+</html>
