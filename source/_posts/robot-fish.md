@@ -1,6 +1,6 @@
 ---
 title: 高速三尾智能机器鱼设计
-thumbnail: https://vaporfigurebed.oss-cn-beijing.aliyuncs.com//blogimg/fm.png
+thumbnail: https://vaporfigurebed.oss-cn-beijing.aliyuncs.com/blogimg/1694372641315.jpg
 toc: true
 date: 2023-05-28 01:02:03
 tags: 智能设计
