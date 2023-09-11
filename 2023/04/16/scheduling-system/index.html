@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+
+    
+
+    
+    <title>智能排班系统 | My Blog</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="智能设计" />
+    
+    <meta name="description" content="本项目采用了前后端分离框架。使用html，java，css语言进行前端页面搭建。使用php连接前端页面和MySQL数据库。使用Python完成后端排班运算过程，搭建Flask框架实现前后端数据连接。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="智能排班系统">
+<meta property="og:url" content="http://example.com/2023/04/16/scheduling-system/index.html">
+<meta property="og:site_name" content="My Blog">
+<meta property="og:description" content="本项目采用了前后端分离框架。使用html，java，css语言进行前端页面搭建。使用php连接前端页面和MySQL数据库。使用Python完成后端排班运算过程，搭建Flask框架实现前后端数据连接。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://vaporfigurebed.oss-cn-beijing.aliyuncs.com//blogimg/schedulesystemAIlogo.png">
+<meta property="article:published_time" content="2023-04-15T16:00:01.000Z">
+<meta property="article:modified_time" content="2023-09-11T14:10:49.352Z">
+<meta property="article:author" content="Vapor">
+<meta property="article:tag" content="智能设计">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://vaporfigurebed.oss-cn-beijing.aliyuncs.com//blogimg/schedulesystemAIlogo.png">
+    
+
+    
+
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/titillium-web/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+<script src="/libs/jquery/3.5.0/jquery.min.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+    
+    
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">主页</a>
+                                </li>
+                            
+                                    <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a></li></ul>
+                                
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/index.html">关于</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-scheduling-system" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        智能排班系统
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2023/04/16/scheduling-system/" class="article-date">
+       <time datetime="2023-04-15T16:00:01.000Z" itemprop="datePublished">2023-04-16</time>
+    </a>
+  </div>
+
+
+<div class="article-date">
+  <i class="fa fa-calendar-plus-o"></i>
+  <a href="/2023/04/16/scheduling-system/" class="article-date">
+     <time datetime="2023-09-11T14:10:49.352Z" itemprop="dateModified">2023-09-11</time>
+  </a>
+</div>
+
+
+                
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/%E6%99%BA%E8%83%BD%E8%AE%BE%E8%AE%A1/" rel="tag">智能设计</a>
+    </div>
+
+                
+
+                
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            
+
+            
+
+            
+
+            <hr>
+<p>本项目采用了前后端分离框架。使用html，java，css语言进行前端页面搭建。使用php连接前端页面和MySQL数据库。使用Python完成后端排班运算过程，搭建Flask框架实现前后端数据连接。</p>
+<span id="more"></span>
+<hr>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>随着新技术的发展，劳动力管理正在向智能化升级。管理者需要解决员工技能匹配、评估劳动力需求、提高员工效率、降低用工成本等问题。</p>
+<h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><p>本项目致力于将劳动力与业务需求最优化匹配，综合门店管理规则，客户流量波动，员工偏好等因素，将合适数量的员工在合适的时间放在合适的位置上。</p>
+<h2 id="整体解决思路"><a href="#整体解决思路" class="headerlink" title="整体解决思路"></a>整体解决思路</h2><p>本项目采用了前后端分离框架。使用html，java，css语言进行前端页面搭建。使用php连接前端页面和MySQL数据库。使用Python完成后端排班运算过程，搭建Flask框架实现前后端数据连接。<br><img src="https://vaporfigurebed.oss-cn-beijing.aliyuncs.com//blogimg/整体解决思路图.png" alt="整体解决思路图"></p>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>解决排班问题时，基于0-1整数规划，变量由周、日、员工、时间段决定。根据门店规则，员工偏好和预测客流量确定约束条件，根据排班总时长和偏好满足程度确定目标方程，建立求解排班结果的MIP模型。使用分支定界算法求解该模型，得到最终排班结果。</p>
+<hr>
+<h1 id="创意描述"><a href="#创意描述" class="headerlink" title="创意描述"></a>创意描述</h1><p>(1)使用前后端分离来实现智能排班系统，提高了系统的可扩展性和灵活性。<br>(2)建立了求解排班结果的MIP混合整数规划模型，保证了系统在不同场景下的适用性。<br>(3)采用分支界定算法进行求解，保证了程序的正确性和时间效率。<br>(4)前端页面的下拉菜单，多选框等元素中的可选项能随着数据库中的元素改变而改变。<br>(5)提供了Excle表格导出功能，让用户更方便地查看和使用排班数据。<br>(6)在完成赛题所有要求的情况下，制定了夜班规则和限流规则，使该项目更加贴近实际场景。<br>(7)本项目自创方程组，以多个变量为单位进行遍历，完美地解决员工连续工作时长限制问题。  </p>
+<hr>
+<h1 id="功能简介"><a href="#功能简介" class="headerlink" title="功能简介"></a>功能简介</h1><h2 id="登录功能"><a href="#登录功能" class="headerlink" title="登录功能"></a>登录功能</h2><p>用户可以通过已经注册的信息进行登录，从而进入“翼排班”智能排班系统。</p>
+<h2 id="排班与查看"><a href="#排班与查看" class="headerlink" title="排班与查看"></a>排班与查看</h2><h3 id="生成排班表"><a href="#生成排班表" class="headerlink" title="生成排班表"></a>生成排班表</h3><p>在完成所有信息的管理之后，用户可点击“一键排班”按钮实现排班表的生成。<br><img src="https://vaporfigurebed.oss-cn-beijing.aliyuncs.com//blogimg/生成排班表示意图.png" alt="生成排班表示意图"></p>
+<h3 id="查看排班表"><a href="#查看排班表" class="headerlink" title="查看排班表"></a>查看排班表</h3><p>生成排班表后，用户可根据自己的需求，查看不同门店和不同日期的排班表，同时可以选择周视图、日视图、按员工分组、按岗位分组和按技能分组等方式进行查看。<br><img src="https://vaporfigurebed.oss-cn-beijing.aliyuncs.com//blogimg/查看排班表示意图.png" alt="查看排班表示意图"></p>
+<h3 id="导出排班表"><a href="#导出排班表" class="headerlink" title="导出排班表"></a>导出排班表</h3><p>用户可以根据需求导出在不同查看方式下的排班表，导出格式为Excel。<br><img src="https://vaporfigurebed.oss-cn-beijing.aliyuncs.com//blogimg/导出Excel示意图.png" alt="导出Excel示意图"></p>
+<h3 id="修改排班表"><a href="#修改排班表" class="headerlink" title="修改排班表"></a>修改排班表</h3><p>用户可根据需求修改排班表，可通过“指定时间段”按钮来修改特定员工上班的时间段，可通过“指定班次”按钮来调整员工在特定时间段的班次。<br><img src="https://vaporfigurebed.oss-cn-beijing.aliyuncs.com//blogimg/指定时间段示意图.png" alt="指定时间段示意图"><br><img src="https://vaporfigurebed.oss-cn-beijing.aliyuncs.com//blogimg/指定班次示意图.png" alt="指定班次示意图"></p>
+<h2 id="信息管理功能"><a href="#信息管理功能" class="headerlink" title="信息管理功能"></a>信息管理功能</h2><h3 id="门店信息管理"><a href="#门店信息管理" class="headerlink" title="门店信息管理"></a>门店信息管理</h3><p>在门店管理界面，可以通过输入门店的各种数据将门店信息上传至数据库。<br><img src="https://vaporfigurebed.oss-cn-beijing.aliyuncs.com//blogimg/门店信息管理示意图.png" alt="门店信息管理示意图"></p>
+<h3 id="员工信息管理"><a href="#员工信息管理" class="headerlink" title="员工信息管理"></a>员工信息管理</h3><p>在员工信息管理界面，可以通过输入员工的各种数据将员工信息上传至数据库，包括员工编号、员工姓名、工作日偏好、工作时间偏好、最大工作时间等。<br><img src="https://vaporfigurebed.oss-cn-beijing.aliyuncs.com//blogimg/员工信息管理示意图.png" alt="员工信息管理示意图"></p>
+<h3 id="自定义排班规则管理"><a href="#自定义排班规则管理" class="headerlink" title="自定义排班规则管理"></a>自定义排班规则管理</h3><p>选择自定义规则应用门店后，可设置开店规则、关店规则、客流规则、夜班规则、限流规则。 在满足赛题的所有要求的情况下，本作品自行拟定了夜班规则和限流规则。<br><img src="https://vaporfigurebed.oss-cn-beijing.aliyuncs.com//blogimg/自定义排班规则示意图.png" alt="自定义排班规则示意图"></p>
+<h3 id="固定排班规则管理"><a href="#固定排班规则管理" class="headerlink" title="固定排班规则管理"></a>固定排班规则管理</h3><p>固定规则包括门店营业时间规则、工作时长规则、休息时间段等。满足赛题的所有要求。<br><img src="https://vaporfigurebed.oss-cn-beijing.aliyuncs.com//blogimg/固定规则示意图.png" alt="固定规则示意图"></p>
+<h3 id="数据查看与修改"><a href="#数据查看与修改" class="headerlink" title="数据查看与修改"></a>数据查看与修改</h3><p>在完成信息的输入后，本项目支持对业务预测数据，员工数据，门店数据的查看与修改。</p>
+<hr>
+<h1 id="特色综述"><a href="#特色综述" class="headerlink" title="特色综述"></a>特色综述</h1><p>本项目采用前后端分离框架。建立MIP混合整数规划模型，采用分支界定算法求解。提供了Excle表格导出功能，更方便用户查看和使用排班数据。使用php连接前端页面和MySQL数据库，搭建Flask框架实现前后端数据连接。</p>
+<hr>
+<h1 id="开发工具与技术"><a href="#开发工具与技术" class="headerlink" title="开发工具与技术"></a>开发工具与技术</h1><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">应用模块</th>
+<th style="text-align:center">开发工具</th>
+<th style="text-align:center">技术</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">前端网页</td>
+<td style="text-align:center">VScode</td>
+<td style="text-align:center">Html, Css, JavaScript</td>
+</tr>
+<tr>
+<td style="text-align:center">数据传输</td>
+<td style="text-align:center">VScode</td>
+<td style="text-align:center">MySQL, php, Flask</td>
+</tr>
+<tr>
+<td style="text-align:center">后端算法</td>
+<td style="text-align:center">VScode</td>
+<td style="text-align:center">Python, Cplex, MIP</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h1 id="应用对象"><a href="#应用对象" class="headerlink" title="应用对象"></a>应用对象</h1><p>本web应用适用于企业管理者和人力资源负责人，以及所有需要为员工安排工作的人员或企业。</p>
+<hr>
+<h1 id="应用环境"><a href="#应用环境" class="headerlink" title="应用环境"></a>应用环境</h1><p>智能排班系统是新兴技术，近年来在医疗保健、零售、酒店、餐饮等行业广泛应用。全球智能排班系统市场规模不断扩大，未来仍将持续增长。在各行各业都有着广泛的应用前景。</p>
+<hr>
+<h1 id="应用结语"><a href="#应用结语" class="headerlink" title="应用结语"></a>应用结语</h1><p>经过测试，本项目能够以最优整数目标值与剩余最优节点目标值之间的差距值为0.028的条件下，在3.22s内，适应客流变化，并满足所有员工偏好及门店规则，生成排班表。并提供查看，筛选，导出等功能。</p>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://example.com/2023/04/16/scheduling-system/" data-id="clmeyuafl00063wtrbq6dglen" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Vapor"
+        },
+        "headline": "智能排班系统",
+        "image": "http://example.comhttps://vaporfigurebed.oss-cn-beijing.aliyuncs.com//blogimg/schedulesystemAIlogo.png",
+        "keywords": "智能设计",
+        "genre": "技术",
+        "datePublished": "2023-04-16",
+        "dateCreated": "2023-04-16",
+        "dateModified": "2023-09-11",
+        "url": "http://example.com/2023/04/16/scheduling-system/",
+        "description": "
+本项目采用了前后端分离框架。使用html，java，css语言进行前端页面搭建。使用php连接前端页面和MySQL数据库。使用Python完成后端排班运算过程，搭建Flask框架实现前后端数据连接。",
+        "wordCount": 140
+    }
+</script>
+
+</article>
+
+    <section id="comments">
+    
+    </section>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        
+        
+        <p>十点准时下班！</p>
+        <ul class="social-links">
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2023/05/28/robot-fish/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">下一篇</strong>
+        <p class="article-nav-title">
+        
+            高速三尾智能机器鱼设计
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2022/11/22/robot-car/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">上一篇</strong>
+        <p class="article-nav-title">机器车巡线与人群识别系统设计</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+<div class="widget-wrap widget-list">
+    <h3 class="widget-title">目录</h3>
+    <div class="widget">
+        <div id="toc" class="toc-article">
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-number">1.1.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%AE%E6%A0%87"><span class="toc-number">1.2.</span> <span class="toc-text">目标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B4%E4%BD%93%E8%A7%A3%E5%86%B3%E6%80%9D%E8%B7%AF"><span class="toc-number">1.3.</span> <span class="toc-text">整体解决思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-number">1.4.</span> <span class="toc-text">解决方案</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%9B%E6%84%8F%E6%8F%8F%E8%BF%B0"><span class="toc-number">2.</span> <span class="toc-text">创意描述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8A%9F%E8%83%BD%E7%AE%80%E4%BB%8B"><span class="toc-number">3.</span> <span class="toc-text">功能简介</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%99%BB%E5%BD%95%E5%8A%9F%E8%83%BD"><span class="toc-number">3.1.</span> <span class="toc-text">登录功能</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%92%E7%8F%AD%E4%B8%8E%E6%9F%A5%E7%9C%8B"><span class="toc-number">3.2.</span> <span class="toc-text">排班与查看</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%9F%E6%88%90%E6%8E%92%E7%8F%AD%E8%A1%A8"><span class="toc-number">3.2.1.</span> <span class="toc-text">生成排班表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E6%8E%92%E7%8F%AD%E8%A1%A8"><span class="toc-number">3.2.2.</span> <span class="toc-text">查看排班表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%BC%E5%87%BA%E6%8E%92%E7%8F%AD%E8%A1%A8"><span class="toc-number">3.2.3.</span> <span class="toc-text">导出排班表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E6%8E%92%E7%8F%AD%E8%A1%A8"><span class="toc-number">3.2.4.</span> <span class="toc-text">修改排班表</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%A1%E6%81%AF%E7%AE%A1%E7%90%86%E5%8A%9F%E8%83%BD"><span class="toc-number">3.3.</span> <span class="toc-text">信息管理功能</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%A8%E5%BA%97%E4%BF%A1%E6%81%AF%E7%AE%A1%E7%90%86"><span class="toc-number">3.3.1.</span> <span class="toc-text">门店信息管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%91%98%E5%B7%A5%E4%BF%A1%E6%81%AF%E7%AE%A1%E7%90%86"><span class="toc-number">3.3.2.</span> <span class="toc-text">员工信息管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8E%92%E7%8F%AD%E8%A7%84%E5%88%99%E7%AE%A1%E7%90%86"><span class="toc-number">3.3.3.</span> <span class="toc-text">自定义排班规则管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BA%E5%AE%9A%E6%8E%92%E7%8F%AD%E8%A7%84%E5%88%99%E7%AE%A1%E7%90%86"><span class="toc-number">3.3.4.</span> <span class="toc-text">固定排班规则管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%9F%A5%E7%9C%8B%E4%B8%8E%E4%BF%AE%E6%94%B9"><span class="toc-number">3.3.5.</span> <span class="toc-text">数据查看与修改</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%89%B9%E8%89%B2%E7%BB%BC%E8%BF%B0"><span class="toc-number">4.</span> <span class="toc-text">特色综述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E4%B8%8E%E6%8A%80%E6%9C%AF"><span class="toc-number">5.</span> <span class="toc-text">开发工具与技术</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E5%AF%B9%E8%B1%A1"><span class="toc-number">6.</span> <span class="toc-text">应用对象</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E7%8E%AF%E5%A2%83"><span class="toc-number">7.</span> <span class="toc-text">应用环境</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E7%BB%93%E8%AF%AD"><span class="toc-number">8.</span> <span class="toc-text">应用结语</span></a></li></ol>
+        </div>
+    </div>
+</div>
+
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2023/09/06/building%20blog%20note/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://vaporfigurebed.oss-cn-beijing.aliyuncs.com//blogimg/catH.png)" alt="基于Github的Hexo博客搭建" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a></p>
+                            <p class="item-title"><a href="/2023/09/06/building%20blog%20note/" class="title">基于Github的Hexo博客搭建</a></p>
+                            <p class="item-date"><time datetime="2023-09-06T12:00:32.000Z" itemprop="datePublished">2023-09-06</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2023/05/28/robot-fish/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://vaporfigurebed.oss-cn-beijing.aliyuncs.com/blogimg/1694372641315.jpg)" alt="高速三尾智能机器鱼设计" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a></p>
+                            <p class="item-title"><a href="/2023/05/28/robot-fish/" class="title">高速三尾智能机器鱼设计</a></p>
+                            <p class="item-date"><time datetime="2023-05-27T17:02:03.000Z" itemprop="datePublished">2023-05-28</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2023/04/16/scheduling-system/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://vaporfigurebed.oss-cn-beijing.aliyuncs.com//blogimg/schedulesystemAIlogo.png)" alt="智能排班系统" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a></p>
+                            <p class="item-title"><a href="/2023/04/16/scheduling-system/" class="title">智能排班系统</a></p>
+                            <p class="item-date"><time datetime="2023-04-15T16:00:01.000Z" itemprop="datePublished">2023-04-16</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/11/22/robot-car/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://vaporfigurebed.oss-cn-beijing.aliyuncs.com//blogimg/robotcar.png)" alt="机器车巡线与人群识别系统设计" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a></p>
+                            <p class="item-title"><a href="/2022/11/22/robot-car/" class="title">机器车巡线与人群识别系统设计</a></p>
+                            <p class="item-date"><time datetime="2022-11-22T07:40:00.000Z" itemprop="datePublished">2022-11-22</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">分类</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a><span class="category-list-count">4</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">九月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">五月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">标签</h3>
+        <div class="widget">
+            <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" rel="tag">博客搭建</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%99%BA%E8%83%BD%E8%AE%BE%E8%AE%A1/" rel="tag">智能设计</a><span class="tag-list-count">3</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" style="font-size: 10px;">博客搭建</a> <a href="/tags/%E6%99%BA%E8%83%BD%E8%AE%BE%E8%AE%A1/" style="font-size: 20px;">智能设计</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">链接</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2023 Vapor</p>
+                
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+    </div>
+    
+
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+        </script>
+        
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML.js"></script>
+
+    
+
+    
+    
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+</body>
+</html>
