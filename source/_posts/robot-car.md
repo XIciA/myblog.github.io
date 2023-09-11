@@ -3,7 +3,7 @@ title: 机器车巡线与人群识别系统设计
 toc: true
 date: 2022-11-22 15:40:00
 tags: 智能设计
-categories: 科技
+categories: 技术
 thumbnail: https://vaporfigurebed.oss-cn-beijing.aliyuncs.com//blogimg/robotcar.png
 ---
 
