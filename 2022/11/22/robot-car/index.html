@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+
+    
+
+    
+    <title>机器车巡线与人群识别系统设计 | My Blog</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="智能设计" />
+    
+    <meta name="description" content="本项目完成了机器车在复杂环境的巡线以及人群识别功能。软件平台采用基于 Ubuntu16.04 的 Kinectic 版的机器人操作系统 ROS。巡线技术主要采用 HSV 划线遍历法，识别路线采用限制 HSV 通道阈值进行筛选，识别人群采用 paddlepaddle 算法库中yolov3_darknet53_pedestrian 模型进行人群定位，进而使用 HSV 模型进行颜色判别。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器车巡线与人群识别系统设计">
+<meta property="og:url" content="http://example.com/2022/11/22/robot-car/index.html">
+<meta property="og:site_name" content="My Blog">
+<meta property="og:description" content="本项目完成了机器车在复杂环境的巡线以及人群识别功能。软件平台采用基于 Ubuntu16.04 的 Kinectic 版的机器人操作系统 ROS。巡线技术主要采用 HSV 划线遍历法，识别路线采用限制 HSV 通道阈值进行筛选，识别人群采用 paddlepaddle 算法库中yolov3_darknet53_pedestrian 模型进行人群定位，进而使用 HSV 模型进行颜色判别。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://vaporfigurebed.oss-cn-beijing.aliyuncs.com//blogimg/robotcar.png">
+<meta property="article:published_time" content="2022-11-22T07:40:00.000Z">
+<meta property="article:modified_time" content="2023-09-11T07:08:30.719Z">
+<meta property="article:author" content="Vapor">
+<meta property="article:tag" content="智能设计">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://vaporfigurebed.oss-cn-beijing.aliyuncs.com//blogimg/robotcar.png">
+    
+
+    
+
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/titillium-web/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+<script src="/libs/jquery/3.5.0/jquery.min.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+    
+    
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">主页</a>
+                                </li>
+                            
+                                    <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/%E7%A7%91%E6%8A%80/">科技</a></li></ul>
+                                
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/index.html">关于</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/%E7%A7%91%E6%8A%80/">科技</a>
+    </h1>
+</div>
+
+                        <div class="main-body-content">
+                            <article id="post-robot-car" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        机器车巡线与人群识别系统设计
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-meta">
+                
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2022/11/22/robot-car/" class="article-date">
+       <time datetime="2022-11-22T07:40:00.000Z" itemprop="datePublished">2022-11-22</time>
+    </a>
+  </div>
+
+
+<div class="article-date">
+  <i class="fa fa-calendar-plus-o"></i>
+  <a href="/2022/11/22/robot-car/" class="article-date">
+     <time datetime="2023-09-11T07:08:30.719Z" itemprop="dateModified">2023-09-11</time>
+  </a>
+</div>
+
+
+                
+
+                
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/%E6%99%BA%E8%83%BD%E8%AE%BE%E8%AE%A1/" rel="tag">智能设计</a>
+    </div>
+
+                
+
+                
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            
+
+            
+
+            
+
+            <hr>
+<p>本项目完成了机器车在复杂环境的巡线以及人群识别功能。软件平台采用基于 Ubuntu16.04 的 Kinectic 版的机器人操作系统 ROS。巡线技术主要采用 HSV 划线遍历法，识别路线采用限制 HSV 通道阈值进行筛选，识别人群采用 paddlepaddle 算法库中yolov3_darknet53_pedestrian 模型进行人群定位，进而使用 HSV 模型进行颜色判别。</p>
+<span id="more"></span>
+<hr>
+<h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><p>机器车需要从起点位置出发，机沿途依次通过上下斜坡、单边桥、S弯道、直角弯道、U 形弯道、双边桥等地形，并在弯道区域完成人群识别任务，最终到达终点，并在终端区输出人群总数、红色系上衣人数、蓝色系上衣人数。</p>
+<hr>
+<h1 id="设计方案"><a href="#设计方案" class="headerlink" title="设计方案"></a>设计方案</h1><h2 id="技术基础"><a href="#技术基础" class="headerlink" title="技术基础"></a>技术基础</h2><ol>
+<li><p><strong>HSV模型</strong>：HSV（Hue, Saturation, Value）是由A. R. Smith于1978年创建的一种颜色空间，也称为六角锥体模型（Hexcone Model）。在HSV模型中，颜色由色度（Hue）、饱和度（Saturation）、明度（Value）组成。</p>
+<p> <img src="https://vaporfigurebed.oss-cn-beijing.aliyuncs.com//blogimg/hsv.png" alt="HSV模型图片"></p>
+<p>在使用HSV时，可以使用OpenCV中的<code>cv2.COLOR_RGB2HSV</code>将RGB模型图像转换成HSV模型图像。转换原理如下：</p>
+<p>假设$(r, g, b)$分别是一个颜色的红、绿和蓝坐标，它们的值是在0到1之间的实数，$max$等于$r, g, b$中的最大值，$min$等于$r, g, b$中的最小值。</p>
+<ul>
+<li><p>色度（Hue）计算如下：</p>
+<script type="math/tex; mode=display">
+h = \begin{cases}
+0^\circ & \text{if } \max = \min \\
+60^\circ \times \frac{g-b}{\max -\min }+0^\circ, & \text{if } \max =r \text{ and } g \geq b \\
+60^\circ \times \frac{g-b}{\max -\min }+360^\circ, & \text{if } \max =r \text{ and } g<b \\
+60^\circ \times \frac{b-r}{\max -\min }+120^\circ, & \text{if } \max =g \\
+60^\circ \times \frac{r-g}{\max -\min }+240^\circ, & \text{if max }=b
+\end{cases}</script></li>
+<li><p>饱和度（Saturation）计算如下：</p>
+<script type="math/tex; mode=display">
+s = \begin{cases}
+0, & \text{if } \max = 0 \\
+\frac{\max -\min }{\max }=1-\frac{\min }{\max }, & \text{otherwise}
+\end{cases}</script></li>
+<li><p>明度（Value）计算如下：</p>
+<script type="math/tex; mode=display">
+v = \max</script></li>
+</ul>
+</li>
+<li><p><strong>yolov3_darknet53_pedestrian模型概述</strong>：<br>行人检测是利用计算机视觉技术判断图像中是否存在行人并给予精确定位，一般用矩形框表示，这也是典型的目标检测问题。该PaddleHub Module的网络为YOLOv3，其中backbone为DarkNet53，采用百度自建大规模车辆数据集训练得到，支持预测和finetune。</p>
+</li>
+<li><p><strong>Paddlehub的安装与调用</strong>：<br>首先安装PaddlePaddle以百度多年的深度学习技术研究和业务应用为基础，集深度学习核心训练和推理框架、基础模型库、端到端开发套件、丰富的工具组件于一体的底层环境。</p>
+</li>
+<li><p><strong>基于Anaconda的虚拟环境搭建</strong>：<br>Anaconda是一个具有开源、安装过程简单、高性能使用Python和R语言的高性能虚拟环境，具有各种conda包、环境管理器、1000+的开源库。</p>
+</li>
+<li><p><strong>工作空间和功能包</strong>：<br>Workspace是一个存放工程开发相关文件的文件夹，内容如下:</p>
+<ul>
+<li>src: 代码空间（Source Space）</li>
+<li>build: 编译空间（Build Space）</li>
+<li>devel: 开发空间（Development Space）</li>
+<li>install: 安装空间（Install Space）</li>
+</ul>
+</li>
+</ol>
+<h2 id="巡线设计"><a href="#巡线设计" class="headerlink" title="巡线设计"></a>巡线设计</h2><h3 id="设计思路"><a href="#设计思路" class="headerlink" title="设计思路"></a>设计思路</h3><p><img src="https://vaporfigurebed.oss-cn-beijing.aliyuncs.com//blogimg/巡线流程图.jpg" alt="巡线流程图"></p>
+<h3 id="函数准备"><a href="#函数准备" class="headerlink" title="函数准备"></a>函数准备</h3><ul>
+<li><strong>质点计算函数 particle()</strong>：在图像中取20条横线，以10为步长进行遍历。</li>
+<li><strong>可视化函数 visualization()</strong>：在图像上画出质点的位置和相邻质点之间的连线。</li>
+<li><strong>斜率函数()</strong>：算出相邻质点之间的斜率，其中若斜率为无穷，则输出0。</li>
+<li><strong>转换函数 transition(K)</strong>：将斜率转换为运动参数，把图像由上至下分为a，b，c三个区域，根据斜率大小分为left、leftleft、right、rightright、forward五种状态。</li>
+<li><strong>判断函数 judge()</strong>：根据运动参数判断小车行驶方向。</li>
+</ul>
+<h3 id="实现步骤"><a href="#实现步骤" class="headerlink" title="实现步骤"></a>实现步骤</h3><ul>
+<li><strong>第一步</strong>：用cv2.imread读取图片。</li>
+<li><strong>第二步</strong>：用cv2.COLOR_BGR2HSV进行色彩空间的转化。</li>
+<li><strong>第三步</strong>：用HSV处理得到只含黑线部分的二值图。</li>
+<li><strong>第四步</strong>：找到最大轮廓，用cv2.minAreaRect和cv2.boxPoints得到最大轮廓的最小外接矩形的四个顶点。用cv2.drawContours画出最大轮廓的最小外接矩形轮廓。</li>
+<li><strong>第五步</strong>：执行质点计算函数 particle()。</li>
+<li><p><strong>第六步</strong>：执行可视化函数 visualization()。</p>
+</li>
+<li><p><strong>第七步</strong>：执行斜率函数 slope()。</p>
+</li>
+<li><strong>第八步</strong>：执行转换函数 transition(K)。</li>
+<li><strong>第九步</strong>：执行判断函数 judge()。</li>
+</ul>
+<h3 id="具体应用"><a href="#具体应用" class="headerlink" title="具体应用"></a>具体应用</h3><p>在实际运行中，本项目把判断函数输出的运动信息做了进一步细化。该项目以修正半径 R 为唯一可控制变量，在确定线速度 v 的情况下，通过如下公式求出角速度 w：</p>
+<script type="math/tex; mode=display">
+w = \frac{v}{R}</script><p>通过小车位置 x 来确定修正半径 R，具体步骤如下：</p>
+<p>首先求出偏移量 Δx：</p>
+<script type="math/tex; mode=display">
+\Delta x = 320 - x</script><p>然后求出偏移方向 i：</p>
+<script type="math/tex; mode=display">
+i = \frac{|\Delta x|}{\Delta x}</script><p>最后确定修正半径 R：</p>
+<script type="math/tex; mode=display">
+R = \begin{cases}
++\infty, & 0 \leq |\Delta x| < 15 \\
+6.5i, & 15 \leq |\Delta x| < 30 \\
+5.5i, & 30 \leq |\Delta x| < 50 \\
+4.5i, & 50 \leq |\Delta x| < 70 \\
+3i, & 70 \leq |\Delta x| < 75 \\
+2i, & 75 \leq |\Delta x| < 120 \\
+0.65i, & 120 \leq |\Delta x| < 200 \\
+0.6i, & 200 \leq |\Delta x| < 280 \\
+0.5i, & 280 \leq |\Delta x| < 320 \\
+\end{cases}</script><h2 id="人物检测设计"><a href="#人物检测设计" class="headerlink" title="人物检测设计"></a>人物检测设计</h2><h3 id="设计思路-1"><a href="#设计思路-1" class="headerlink" title="设计思路"></a>设计思路</h3><p><img src="https://vaporfigurebed.oss-cn-beijing.aliyuncs.com//blogimg/人物检测设计思路.jpg" alt="人物检测设计思路"></p>
+<h3 id="函数准备-1"><a href="#函数准备-1" class="headerlink" title="函数准备"></a>函数准备</h3><ul>
+<li><strong>数据处理函数 data(a)</strong>：用于处理 result 数据。处理 result 后得到的数据 a_list 为列表，包含人物编号、最高点 y 坐标、最低点 y 坐标、最左点 x 坐标、最右点 x 坐标。</li>
+<li><strong>红蓝颜色比较函数 comparison(p)</strong>：通过 data(a) 处理后的坐标点依次遍历检测到的人物。HSV_red 和 HSV_blue 为 HSV 处理后的二值图，统计两者在同一人物区域非零像素点的个数，通过比较判断出红色或蓝色。同时，通过 blue_N 和 red_N 统计蓝色系上衣人数和红色系上衣人数。</li>
+</ul>
+<h3 id="实现步骤-1"><a href="#实现步骤-1" class="headerlink" title="实现步骤"></a>实现步骤</h3><ul>
+<li><strong>第一步</strong>：输入图片路径，通过 cv2.imread 读取图片，读取 BGR 格式。</li>
+<li><strong>第二步</strong>：使用 yolov3_darknet53_pedestrian 模型检测人物位置。</li>
+<li><strong>第三步</strong>：将图片通过 HSV 处理，分别得到只有蓝色部分的 HSV_blue 二值化图片，分别得到只有红色部分的 HSV_red 二值化图片。</li>
+<li><strong>第四步</strong>：通过 data(result) 简化数据。</li>
+<li><strong>第五步</strong>：用 len(result[0][‘data’]) 得到人物总数，使用 comparison(i) 判断每个人的颜色。</li>
+<li><strong>第六步</strong>：输出人群总数、蓝色系上衣人数、红色系上衣人数。</li>
+</ul>
+<h3 id="具体应用-1"><a href="#具体应用-1" class="headerlink" title="具体应用"></a>具体应用</h3><p>在平安城市车实际运行中，本项目通过动态拍摄，并将连续拍摄的图片进行拼接，最后进行图片处理，结果鲁棒性高。</p>
+<hr>
+<h1 id="测试分析"><a href="#测试分析" class="headerlink" title="测试分析"></a>测试分析</h1><h2 id="测试分析-1"><a href="#测试分析-1" class="headerlink" title="测试分析"></a>测试分析</h2><h3 id="测试准备"><a href="#测试准备" class="headerlink" title="测试准备"></a>测试准备</h3><ol>
+<li><p><strong>平安城市小车</strong>：在测试之前，我们考虑了车的配重以及摄像头的摆放位置，对小车进行了合理改装。</p>
+</li>
+<li><p><strong>场地</strong>：在参考多种环境及可能出现的不确定环境因素下，选择以室内为主体的测试环境，并用地纸覆盖室内场地进行测试。</p>
+</li>
+<li><p><strong>软件</strong>：依托于 ROS-Kinetic 与 Ubuntu 系统的良好兼容性，选择了基于它们进行开发的相关程序进行测试。</p>
+</li>
+<li><p><strong>支持技术</strong>：根据目前成熟的 OpenCV 技术以及其跨平台性和兼容性，依托其进行视觉识别处理。在运动方面，基于 ROS 进行环境配置和开发测试。</p>
+</li>
+<li><p><strong>编译环境</strong>：本项目软件平台采用基于 Ubuntu 16.04 的 Kinetic 版的机器人操作系统ROS。</p>
+</li>
+</ol>
+<h3 id="测试内容与分析"><a href="#测试内容与分析" class="headerlink" title="测试内容与分析"></a>测试内容与分析</h3><p>测试内容如下表所示：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">实验阶段/次数</th>
+<th style="text-align:center">实验指标</th>
+<th style="text-align:center">算法改进前正确率</th>
+<th style="text-align:center">算法改进后正确率</th>
+<th style="text-align:center">升比例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">3</td>
+<td style="text-align:center">人群识别</td>
+<td style="text-align:center">76%</td>
+<td style="text-align:center">100%</td>
+<td style="text-align:center">24%</td>
+</tr>
+<tr>
+<td style="text-align:center">5</td>
+<td style="text-align:center">巡线任务</td>
+<td style="text-align:center">71%</td>
+<td style="text-align:center">100%</td>
+<td style="text-align:center">29%</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="巡线测试"><a href="#巡线测试" class="headerlink" title="巡线测试"></a>巡线测试</h4><p>执行可视化函数 visualization()，对检测到的道路进行分析，并预测小车修正轨迹，效果图如下：</p>
+<p><img src="https://vaporfigurebed.oss-cn-beijing.aliyuncs.com//blogimg/可视化结果.png" alt="可视化结果"></p>
+<p><img src="https://vaporfigurebed.oss-cn-beijing.aliyuncs.com//blogimg/修正预测图.jpg" alt="修正预测图"></p>
+<h4 id="人物检测测试"><a href="#人物检测测试" class="headerlink" title="人物检测测试"></a>人物检测测试</h4><p>通过 yolov3_darknet53_pedestrian 模型检测人物位置，效果如下图：</p>
+<p><img src="https://vaporfigurebed.oss-cn-beijing.aliyuncs.com//blogimg/人物位置检测结果.png" alt="人物位置检测结果"></p>
+<p>将图片通过 HSV 处理，分别得到只有蓝色部分的 HSV_blue 二值化图片和只有红色部分的 HSV_red 二值化图片，效果如下图：</p>
+<p><img src="https://vaporfigurebed.oss-cn-beijing.aliyuncs.com//blogimg/处理后只含蓝色的二值图.png" alt="处理后只含蓝色的二值图"></p>
+<p><img src="https://vaporfigurebed.oss-cn-beijing.aliyuncs.com//blogimg/处理后只含红色的二值图.png" alt="处理后只含红色的二值图"></p>
+<p>在多次实验中，经过对道路巡线和不同颜色人物识别方案的不断改进，同时根据实际运行环境进行参数调节和修正，代码在实际运用中效果提升显著，该项目完美地完成了赛题要求任务，并且鲁棒性极高。</p>
+<hr>
+<h1 id="应用前景"><a href="#应用前景" class="headerlink" title="应用前景"></a>应用前景</h1><p>项目立意于推动国家平安城市建设为背景，以无人化、智能化、动态化的道 路巡逻移动机器人为助推手段，结合国内外先进视觉与多传感器融合无人驾驶技 术、基于深度学习的道路行人检测算法，可实现对城市路面多种状况的预警与联 控，如疫情时代下发烧患者在户外移动、携带可疑物品的行人或是正在实时违法 犯罪行为的罪犯们都将成为移动巡逻机器人的检测目标。<br>巡逻机器人可以通过智能化的数据处理，对可能发生事件实施风险控制，通 过概率预测与结果预测，当事件损失期望达到预警阈值时，机器人可以迅速预警 通知相应管理人员、执法人员。</p>
+<hr>
+<h1 id="创新点"><a href="#创新点" class="headerlink" title="创新点"></a>创新点</h1><p>颜色识别不再单一的采用转换灰度图像，利用灰度图像进一步转换为二值化图像处理，而是采用了 HSV 范围筛选算法。该项目在实现路线检测的过程中遇到光线导致图像检测畸变，在算法调试前期大大降低了程序结果的成功率，团队通过讨论研究采用 HSV通道下不同特征图像的颜色范围进行筛选排除光纤对图像的影响以提高算法的稳定性和鲁棒性，经项目组测试，采用 HSV 范围筛选的算法检测成功率可达到 95% 以上。</p>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://example.com/2022/11/22/robot-car/" data-id="clmetyjcs0003o4tr2mzh8653" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "author": {
+            "@type": "Person",
+            "name": "Vapor"
+        },
+        "headline": "机器车巡线与人群识别系统设计",
+        "image": "http://example.comhttps://vaporfigurebed.oss-cn-beijing.aliyuncs.com//blogimg/robotcar.png",
+        "keywords": "智能设计",
+        "genre": "科技",
+        "datePublished": "2022-11-22",
+        "dateCreated": "2022-11-22",
+        "dateModified": "2023-09-11",
+        "url": "http://example.com/2022/11/22/robot-car/",
+        "description": "
+本项目完成了机器车在复杂环境的巡线以及人群识别功能。软件平台采用基于 Ubuntu16.04 的 Kinectic 版的机器人操作系统 ROS。巡线技术主要采用 HSV 划线遍历法，识别路线采用限制 HSV 通道阈值进行筛选，识别人群采用 paddlepaddle 算法库中yolov3_darknet53_pedestrian 模型进行人群定位，进而使用 HSV 模型进行颜色判别。",
+        "wordCount": 428
+    }
+</script>
+
+</article>
+
+    <section id="comments">
+    
+    </section>
+
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        
+        
+        <p>十点准时下班！</p>
+        <ul class="social-links">
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2023/05/28/robot-fish/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">下一篇</strong>
+        <p class="article-nav-title">
+        
+            高速三尾智能机器鱼设计
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+<div class="widget-wrap widget-list">
+    <h3 class="widget-title">目录</h3>
+    <div class="widget">
+        <div id="toc" class="toc-article">
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">问题描述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%A1%88"><span class="toc-number">2.</span> <span class="toc-text">设计方案</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8A%80%E6%9C%AF%E5%9F%BA%E7%A1%80"><span class="toc-number">2.1.</span> <span class="toc-text">技术基础</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B7%A1%E7%BA%BF%E8%AE%BE%E8%AE%A1"><span class="toc-number">2.2.</span> <span class="toc-text">巡线设计</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E8%AE%A1%E6%80%9D%E8%B7%AF"><span class="toc-number">2.2.1.</span> <span class="toc-text">设计思路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E5%87%86%E5%A4%87"><span class="toc-number">2.2.2.</span> <span class="toc-text">函数准备</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E6%AD%A5%E9%AA%A4"><span class="toc-number">2.2.3.</span> <span class="toc-text">实现步骤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B7%E4%BD%93%E5%BA%94%E7%94%A8"><span class="toc-number">2.2.4.</span> <span class="toc-text">具体应用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%BA%E7%89%A9%E6%A3%80%E6%B5%8B%E8%AE%BE%E8%AE%A1"><span class="toc-number">2.3.</span> <span class="toc-text">人物检测设计</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E8%AE%A1%E6%80%9D%E8%B7%AF-1"><span class="toc-number">2.3.1.</span> <span class="toc-text">设计思路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E5%87%86%E5%A4%87-1"><span class="toc-number">2.3.2.</span> <span class="toc-text">函数准备</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E6%AD%A5%E9%AA%A4-1"><span class="toc-number">2.3.3.</span> <span class="toc-text">实现步骤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B7%E4%BD%93%E5%BA%94%E7%94%A8-1"><span class="toc-number">2.3.4.</span> <span class="toc-text">具体应用</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95%E5%88%86%E6%9E%90"><span class="toc-number">3.</span> <span class="toc-text">测试分析</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95%E5%88%86%E6%9E%90-1"><span class="toc-number">3.1.</span> <span class="toc-text">测试分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95%E5%87%86%E5%A4%87"><span class="toc-number">3.1.1.</span> <span class="toc-text">测试准备</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95%E5%86%85%E5%AE%B9%E4%B8%8E%E5%88%86%E6%9E%90"><span class="toc-number">3.1.2.</span> <span class="toc-text">测试内容与分析</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B7%A1%E7%BA%BF%E6%B5%8B%E8%AF%95"><span class="toc-number">3.1.2.1.</span> <span class="toc-text">巡线测试</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%BA%E7%89%A9%E6%A3%80%E6%B5%8B%E6%B5%8B%E8%AF%95"><span class="toc-number">3.1.2.2.</span> <span class="toc-text">人物检测测试</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E5%89%8D%E6%99%AF"><span class="toc-number">4.</span> <span class="toc-text">应用前景</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%9B%E6%96%B0%E7%82%B9"><span class="toc-number">5.</span> <span class="toc-text">创新点</span></a></li></ol>
+        </div>
+    </div>
+</div>
+
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2023/09/06/building%20blog%20note/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://vaporfigurebed.oss-cn-beijing.aliyuncs.com//blogimg/catH.png)" alt="基于Github的Hexo博客搭建" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a></p>
+                            <p class="item-title"><a href="/2023/09/06/building%20blog%20note/" class="title">基于Github的Hexo博客搭建</a></p>
+                            <p class="item-date"><time datetime="2023-09-06T12:00:32.000Z" itemprop="datePublished">2023-09-06</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2023/05/28/robot-fish/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://vaporfigurebed.oss-cn-beijing.aliyuncs.com/blogimg/1694372641315.jpg)" alt="高速三尾智能机器鱼设计" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a></p>
+                            <p class="item-title"><a href="/2023/05/28/robot-fish/" class="title">高速三尾智能机器鱼设计</a></p>
+                            <p class="item-date"><time datetime="2023-05-27T17:02:03.000Z" itemprop="datePublished">2023-05-28</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2022/11/22/robot-car/" class="thumbnail">
+    
+    
+        <span style="background-image:url(https://vaporfigurebed.oss-cn-beijing.aliyuncs.com//blogimg/robotcar.png)" alt="机器车巡线与人群识别系统设计" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/%E7%A7%91%E6%8A%80/">科技</a></p>
+                            <p class="item-title"><a href="/2022/11/22/robot-car/" class="title">机器车巡线与人群识别系统设计</a></p>
+                            <p class="item-date"><time datetime="2022-11-22T07:40:00.000Z" itemprop="datePublished">2022-11-22</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">分类</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A7%91%E6%8A%80/">科技</a><span class="category-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">九月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">五月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">标签</h3>
+        <div class="widget">
+            <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" rel="tag">博客搭建</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%99%BA%E8%83%BD%E8%AE%BE%E8%AE%A1/" rel="tag">智能设计</a><span class="tag-list-count">2</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" style="font-size: 10px;">博客搭建</a> <a href="/tags/%E6%99%BA%E8%83%BD%E8%AE%BE%E8%AE%A1/" style="font-size: 20px;">智能设计</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">链接</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2023 Vapor</p>
+                
+            </div>
+            <div class="footer-plugins">
+              
+    
+
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+    </div>
+    
+
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+        </script>
+        
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML.js"></script>
+
+    
+
+    
+    
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+</body>
+</html>

@@ -6,13 +6,13 @@
     
 
     
-    <title>归档: 2023/5 | My Blog</title>
+    <title>分类: 科技 | My Blog</title>
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <meta property="og:type" content="website">
 <meta property="og:title" content="My Blog">
-<meta property="og:url" content="http://example.com/archives/2023/05/index.html">
+<meta property="og:url" content="http://example.com/categories/%E7%A7%91%E6%8A%80/index.html">
 <meta property="og:site_name" content="My Blog">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:author" content="Vapor">
@@ -141,7 +141,7 @@
                         <div class="main-body-header">
     <h1 class="header">
     
-    <i class="icon fa fa-archive"></i>归档: 2023/5
+    <i class="icon fa fa-folder-open"></i>分类: <em class="page-title-link">科技</em>
     </h1>
 </div>
 
@@ -154,7 +154,7 @@
         
         <section class="archives-wrap">
             <div class="archive-year-wrap">
-                <a href="/archives/2023" class="archive-year"><i class="icon fa fa-calendar-o"></i>2023</a>
+                <a href="/archives/2022" class="archive-year"><i class="icon fa fa-calendar-o"></i>2022</a>
             </div>
             <div class="archives">
     
@@ -165,10 +165,10 @@
         <article class="article article-summary">
     <div class="article-summary-inner">
         
-        <a href="/2023/05/28/robot-fish/" class="thumbnail">
+        <a href="/2022/11/22/robot-car/" class="thumbnail">
     
     
-        <span style="background-image:url(https://vaporfigurebed.oss-cn-beijing.aliyuncs.com/blogimg/1694372641315.jpg)" alt="高速三尾智能机器鱼设计" class="thumbnail-image"></span>
+        <span style="background-image:url(https://vaporfigurebed.oss-cn-beijing.aliyuncs.com//blogimg/robotcar.png)" alt="机器车巡线与人群识别系统设计" class="thumbnail-image"></span>
     
     
         
@@ -178,20 +178,20 @@
         
         <div class="article-meta">
             <div class="category">
-            <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
+            <a class="article-category-link" href="/categories/%E7%A7%91%E6%8A%80/">科技</a>
             </div>
-            <div class="date"><time datetime="2023-05-27T17:02:03.000Z" itemprop="datePublished">2023-05-28</time></div>
+            <div class="date"><time datetime="2022-11-22T07:40:00.000Z" itemprop="datePublished">2022-11-22</time></div>
         </div>
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2023/05/28/robot-fish/">高速三尾智能机器鱼设计</a>
+        <a href="/2022/11/22/robot-car/">机器车巡线与人群识别系统设计</a>
         </h1>
     
 
         <p class="article-excerpt">
             
-本项目的关键技术包括3D建模技术、舵机控制技术、巡线算法设计、漏油点检测算法设计、图像处理技术、报警技术和仿真分析技术。3D建模技术可以构建出理想的原型样机。舵机控制技术是保证鱼尾能够实现动态平衡和灵活运动的关键技术。巡线算法设计采用对比度算法进行巡线，并且对管道进行提取和消除反光处理，实现了对管道的快速准确的检测和跟踪。漏油点检测算法设计采用了一种基于RGB模型的算法，可以将漏油点从背景中分离出来，并进行检测和统计。图像处理技术中的图像分割和区域处理等关键技术也为巡线算法提高了运算速度。报警技装置包括LCD显示屏、扬声器和小旗子等。仿真分析技术在实际运行和调试过程中对作品进行了进一步优化。机器鱼通过视觉模块进行巡线和漏油点检查，通过语音播报、液晶显示屏变化进行漏油点警告和统计，启动方式为WIFI远程启动，停止方式为视觉识别自动停止。
+本项目完成了机器车在复杂环境的巡线以及人群识别功能。软件平台采用基于 Ubuntu16.04 的 Kinectic 版的机器人操作系统 ROS。巡线技术主要采用 HSV 划线遍历法，识别路线采用限制 HSV 通道阈值进行筛选，识别人群采用 paddlepaddle 算法库中yolov3_darknet53_pedestrian 模型进行人群定位，进而使用 HSV 模型进行颜色判别。
         </p>
     </div>
 </article>
@@ -201,6 +201,7 @@
 
 
     </div></section>
+
 
 
 
